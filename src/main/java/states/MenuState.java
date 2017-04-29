@@ -33,19 +33,19 @@ public class MenuState extends GameState {
         background.update();
     }
 
-    public void draw(Graphics2D g) {
-        background.draw(g);
-        g.setColor(titleColor);
-        g.setFont(titleFont);
-        g.drawString("Scrub Lords", 100, 70);
-        g.setFont(font);
+    public void draw(Graphics graphics) {
+        background.draw(graphics);
+        graphics.setColor(titleColor);
+        graphics.setFont(titleFont);
+        graphics.drawString("Scrub Lords", 100, 70);
+        graphics.setFont(font);
         for (int i = 0; i < options.length; i++) {
             if (i == currentChoice) {
-                g.setColor(Color.GRAY);
+                graphics.setColor(Color.GRAY);
             } else {
-                g.setColor(Color.WHITE);
+                graphics.setColor(Color.WHITE);
             }
-            g.drawString(options[i], 30, 140 + i * 15);
+            graphics.drawString(options[i], 30, 140 + i * 15);
         }
     }
 

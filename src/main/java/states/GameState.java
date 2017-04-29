@@ -1,5 +1,7 @@
 package states;
 
+import java.awt.*;
+
 public abstract class GameState {
     protected GameStateManager gameStateManager;
 
@@ -7,7 +9,7 @@ public abstract class GameState {
 
     public abstract void update();
 
-    public abstract void draw(java.awt.Graphics2D g);
+    public abstract void draw(Graphics g);
 
     public abstract void keyPressed(int k);
 
