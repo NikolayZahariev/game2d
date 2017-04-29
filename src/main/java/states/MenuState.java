@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
- * Created by Legion on 4/29/2017.
+ * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
  */
 public class MenuState implements State {
     private Background background = new Background(1);

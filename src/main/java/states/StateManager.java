@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Created by Legion on 4/30/2017.
+ * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
  */
 public class StateManager {
     public final int MENUSTATE = 0;

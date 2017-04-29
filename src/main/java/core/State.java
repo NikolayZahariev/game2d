@@ -3,7 +3,7 @@ package core;
 import java.awt.*;
 
 /**
- * Created by Legion on 4/30/2017.
+ * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
  */
 public interface State {
 

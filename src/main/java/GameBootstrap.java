@@ -2,6 +2,9 @@ import main.GamePanel;
 
 import javax.swing.*;
 
+/**
+ * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
+ */
 public class GameBootstrap {
     public static void main(String[] args) {
         JFrame window = new JFrame();

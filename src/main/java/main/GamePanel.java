@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by Legion on 4/29/2017.
+ * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
  */
 public class GamePanel extends JPanel implements Runnable, KeyListener {
     public static final int WIDTH = 320;

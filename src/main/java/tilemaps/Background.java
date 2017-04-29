@@ -1,12 +1,13 @@
 package tilemaps;
 
-import javafx.scene.layout.Pane;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
+ */
 public class Background {
     private BufferedImage image;
     private double x;
