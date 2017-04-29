@@ -81,14 +81,15 @@ public class MenuState implements State {
     }
 
     private void select() {
-        if (currentChoice == 0) {
-        }
-        if (currentChoice == 1) {
-        }
-        if (currentChoice == 2) {
-        }
-        if (currentChoice == 3) {
-            System.exit(0);
+        switch (currentChoice) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                System.exit(0);
         }
     }
 }
