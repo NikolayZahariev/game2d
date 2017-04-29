@@ -1,6 +1,6 @@
 package main;
 
-import states.GameStateManager;
+import states.StateManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +8,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
+/**
+ * Created by Legion on 4/29/2017.
+ */
 public class GamePanel extends JPanel implements Runnable, KeyListener {
     public static final int WIDTH = 320;
     public static final int HEIGHT = 240;
@@ -18,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     private long targetTime = 1000 / FPS;
     private BufferedImage image;
     private Graphics graphics;
-    private GameStateManager gameStateManager;
+    private StateManager gameStateManager = new StateManager();
 
     public GamePanel() {
         super();
@@ -36,11 +39,26 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         }
     }
 
-    private void init() {
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        gameStateManager.keyReleased(e.getKeyCode());
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        gameStateManager.keyPressed(e.getKeyCode());
+    }
+
+    @Override
+    public void run() {
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         graphics = image.getGraphics();
         running = true;
-        gameStateManager = new GameStateManager();
         long start;
         long elapsed;
         long wait;
@@ -62,10 +80,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         }
     }
 
-    public void run() {
-        init();
-    }
-
     private void update() {
         gameStateManager.update();
     }
@@ -79,16 +93,4 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
         g2.dispose();
     }
-
-    public void keyTyped(KeyEvent key) {
-    }
-
-    public void keyPressed(KeyEvent key) {
-        gameStateManager.keyPressed(key.getKeyCode());
-    }
-
-    public void keyReleased(KeyEvent key) {
-        gameStateManager.keyReleased(key.getKeyCode());
-    }
-
 }

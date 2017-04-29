@@ -1,6 +1,6 @@
 package tilemaps;
 
-import main.GamePanel;
+import javafx.scene.layout.Pane;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -40,10 +40,10 @@ public class Background {
     public void draw(Graphics graphics) {
         graphics.drawImage(image, (int) x, (int) y, null);
         if (x < 0) {
-            graphics.drawImage(image, (int) x + GamePanel.WIDTH, (int) y, null);
+            graphics.drawImage(image, (int) x + Panel.WIDTH, (int) y, null);
         }
         if (x > 0) {
-            graphics.drawImage(image, (int) x - GamePanel.WIDTH, (int) y, null);
+            graphics.drawImage(image, (int) x - Panel.WIDTH, (int) y, null);
         }
     }
 }

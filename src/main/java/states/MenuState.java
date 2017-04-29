@@ -1,11 +1,15 @@
 package states;
 
+import core.State;
 import tilemaps.Background;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class MenuState extends GameState {
+/**
+ * Created by Legion on 4/29/2017.
+ */
+public class MenuState implements State {
     private Background background = new Background(1);
     private int currentChoice = 0;
     private Color titleColor;
@@ -18,21 +22,24 @@ public class MenuState extends GameState {
             "Quit"
     };
 
-    public MenuState(GameStateManager gameStateManager) {
-        this.gameStateManager = gameStateManager;
+    public MenuState() {
         background.getResource("/backgrounds/bg.jpg");
         titleColor = new Color(0, 173, 255);
         titleFont = new Font("Times New Roman", Font.PLAIN, 28);
         font = new Font("Arial Black", Font.PLAIN, 12);
     }
 
+    @Override
     public void init() {
+
     }
 
+    @Override
     public void update() {
         background.update();
     }
 
+    @Override
     public void draw(Graphics graphics) {
         background.draw(graphics);
         graphics.setColor(titleColor);
@@ -49,18 +56,7 @@ public class MenuState extends GameState {
         }
     }
 
-    private void select() {
-        if (currentChoice == 0) {
-        }
-        if (currentChoice == 1) {
-        }
-        if (currentChoice == 2) {
-        }
-        if (currentChoice == 3) {
-            System.exit(0);
-        }
-    }
-
+    @Override
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_ENTER) {
             select();
@@ -79,7 +75,20 @@ public class MenuState extends GameState {
         }
     }
 
+    @Override
     public void keyReleased(int k) {
+
     }
 
+    private void select() {
+        if (currentChoice == 0) {
+        }
+        if (currentChoice == 1) {
+        }
+        if (currentChoice == 2) {
+        }
+        if (currentChoice == 3) {
+            System.exit(0);
+        }
+    }
 }
