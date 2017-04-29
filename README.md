@@ -1,1 +1,3 @@
-# game2d
+# Scrub Lords
+
+2D Platformer
