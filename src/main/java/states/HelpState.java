@@ -10,20 +10,18 @@ import java.awt.event.KeyEvent;
 /**
  * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
  */
-public class MenuState implements State {
+public class HelpState implements State {
     private Background background = new Background(1);
     private int currentChoice = 0;
     private Color titleColor;
     private Font titleFont;
     private Font font;
     private String[] options = {
-            "Start",
-            "Settings",
-            "Help",
+            "HELP",
             "Quit"
     };
 
-    public MenuState() {
+    public HelpState() {
         background.getResource("/backgrounds/bg.jpg");
         titleColor = new Color(0, 173, 255);
         titleFont = new Font("Times New Roman", Font.PLAIN, 28);
@@ -45,7 +43,6 @@ public class MenuState implements State {
         background.draw(graphics);
         graphics.setColor(titleColor);
         graphics.setFont(titleFont);
-        graphics.drawString("Scrub Lords", 100, 70);
         graphics.setFont(font);
         for (int i = 0; i < options.length; i++) {
             if (i == currentChoice) {
@@ -53,7 +50,7 @@ public class MenuState implements State {
             } else {
                 graphics.setColor(Color.WHITE);
             }
-            graphics.drawString(options[i], 30, 140 + i * 15);
+            graphics.drawString(options[i], 31, 140 + i * 15);
         }
     }
 
@@ -87,13 +84,8 @@ public class MenuState implements State {
                 GamePanel.stateManager.setState(1);
                 break;
             case 1:
-                GamePanel.stateManager.setState(2);
+                GamePanel.stateManager.setState(0);
                 break;
-            case 2:
-                GamePanel.stateManager.setState(3);
-                break;
-            case 3:
-                System.exit(0);
         }
     }
 }

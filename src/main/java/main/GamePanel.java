@@ -21,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     private long targetTime = 1000 / FPS;
     private BufferedImage image;
     private Graphics graphics;
-    private StateManager gameStateManager = new StateManager();
+    public static StateManager stateManager = new StateManager();
 
     public GamePanel() {
         super();
@@ -46,12 +46,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        gameStateManager.keyReleased(e.getKeyCode());
+        stateManager.keyReleased(e.getKeyCode());
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        gameStateManager.keyPressed(e.getKeyCode());
+        stateManager.keyPressed(e.getKeyCode());
     }
 
     @Override
@@ -81,11 +81,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     private void update() {
-        gameStateManager.update();
+        stateManager.update();
     }
 
     private void draw() {
-        gameStateManager.draw(graphics);
+        stateManager.draw(graphics);
     }
 
     private void drawToScreen() {

@@ -10,12 +10,23 @@ import java.util.ArrayList;
  */
 public class StateManager {
     public final int MENUSTATE = 0;
+    public final int CHARSTATE = 1;
+    public final int OPTIONSSTATE = 2;
+    public final int HELPSTATE = 3;
     private ArrayList<State> states = new ArrayList<>();
     private int currentState;
 
     public StateManager() {
         currentState = MENUSTATE;
         states.add(new MenuState());
+        states.add(new CharState());
+        states.add(new SettingsState());
+        states.add(new HelpState());
+    }
+
+    public void setState(int state){
+        currentState = state;
+        states.get(state);
     }
 
     public void update() {
