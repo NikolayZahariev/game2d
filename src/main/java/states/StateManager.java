@@ -13,6 +13,7 @@ public class StateManager {
     public final int CHARSTATE = 1;
     public final int OPTIONSSTATE = 2;
     public final int HELPSTATE = 3;
+    public final int LEVEL1STATE = 4;
     private ArrayList<State> states = new ArrayList<>();
     private int currentState;
 
@@ -22,6 +23,7 @@ public class StateManager {
         states.add(new CharState());
         states.add(new SettingsState());
         states.add(new HelpState());
+        states.add(new LevelOne());
     }
 
     public void setState(int state){

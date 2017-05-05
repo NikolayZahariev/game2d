@@ -83,7 +83,7 @@ public class CharState implements State {
     private void select() {
         switch (currentChoice) {
             case 0:
-                break;
+                GamePanel.stateManager.setState(4);
             case 1:
                 break;
             case 2:
