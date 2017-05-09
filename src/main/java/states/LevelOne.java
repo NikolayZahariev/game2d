@@ -1,7 +1,7 @@
 package states;
 
 import core.State;
-import entities.Player;
+import entities.Berserker;
 import main.GamePanel;
 import tilemaps.Background;
 import tilemaps.TileMap;
@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
 public class LevelOne implements State {
     private TileMap tileMap;
     private Background background = new Background(0.1);
-    private Player player;
+    private Berserker berserker;
 
     public LevelOne() {
         init();
@@ -28,61 +28,58 @@ public class LevelOne implements State {
         tileMap.loadMap("/maps/level1-1.map");
         tileMap.setPosition(0, 0);
         background.getResource("/backgrounds/levelone.gif");
-        player = new Player(tileMap);
-        player.setPosition(100, 100);
+        berserker = new Berserker(tileMap);
+        berserker.setPosition(100, 100);
     }
 
     @Override
     public void update() {
-        player.update();
-        tileMap.setPosition(GamePanel.WIDTH / 2 - player.getx(), GamePanel.HEIGHT / 2 - player.gety());
+        berserker.update();
+        tileMap.setPosition(GamePanel.WIDTH / 2 - berserker.getx(), GamePanel.HEIGHT / 2 - berserker.gety());
     }
 
     @Override
     public void draw(Graphics g) {
         background.draw(g);
         tileMap.draw(g);
-        player.draw(g);
+        berserker.draw(g);
     }
 
     @Override
     public void keyPressed(int k) {
         if(k== KeyEvent.VK_LEFT){
-            player.setLeft(false);
+            berserker.setLeft(false);
         }
         if(k== KeyEvent.VK_RIGHT){
-            player.setRight(false);
+            berserker.setRight(false);
         }
         if(k== KeyEvent.VK_UP){
-            player.setUp(false);
+            berserker.setUp(false);
         }
         if(k== KeyEvent.VK_DOWN){
-            player.setDown(false);
+            berserker.setDown(false);
         }
         if(k== KeyEvent.VK_W){
-            player.setJumping(false);
-        }
-        if(k== KeyEvent.VK_F){
-            player.setFiring();
+            berserker.setJumping(false);
         }
     }
 
     @Override
     public void keyReleased(int k) {
         if(k== KeyEvent.VK_LEFT){
-            player.setLeft(true);
+            berserker.setLeft(true);
         }
         if(k== KeyEvent.VK_RIGHT){
-            player.setRight(true);
+            berserker.setRight(true);
         }
         if(k== KeyEvent.VK_UP){
-            player.setUp(true);
+            berserker.setUp(true);
         }
         if(k== KeyEvent.VK_DOWN){
-            player.setDown(true);
+            berserker.setDown(true);
         }
         if(k== KeyEvent.VK_W){
-            player.setJumping(true);
+            berserker.setJumping(true);
         }
     }
 }
