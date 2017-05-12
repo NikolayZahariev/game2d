@@ -29,13 +29,13 @@ public class LevelOne implements State {
         tileMap.setPosition(0, 0);
         background.getResource("/backgrounds/levelone.gif");
         berserker = new Berserker(tileMap);
-        berserker.setPosition(100, 100);
+        berserker.collision.characterMapPlacement.setPosition(100, 100);
     }
 
     @Override
     public void update() {
         berserker.update();
-        tileMap.setPosition(GamePanel.WIDTH / 2 - berserker.getx(), GamePanel.HEIGHT / 2 - berserker.gety());
+        tileMap.setPosition(GamePanel.WIDTH / 2 - berserker.collision.characterMapPlacement.getx(), GamePanel.HEIGHT / 2 - berserker.collision.characterMapPlacement.gety());
     }
 
     @Override
@@ -48,38 +48,38 @@ public class LevelOne implements State {
     @Override
     public void keyPressed(int k) {
         if(k== KeyEvent.VK_LEFT){
-            berserker.setLeft(false);
+            berserker.movement.setLeft(false);
         }
         if(k== KeyEvent.VK_RIGHT){
-            berserker.setRight(false);
+            berserker.movement.setRight(false);
         }
         if(k== KeyEvent.VK_UP){
-            berserker.setUp(false);
+            berserker.movement.setUp(false);
         }
         if(k== KeyEvent.VK_DOWN){
-            berserker.setDown(false);
+            berserker.movement.setDown(false);
         }
         if(k== KeyEvent.VK_W){
-            berserker.setJumping(false);
+            berserker.movement.setJumping(false);
         }
     }
 
     @Override
     public void keyReleased(int k) {
         if(k== KeyEvent.VK_LEFT){
-            berserker.setLeft(true);
+            berserker.movement.setLeft(true);
         }
         if(k== KeyEvent.VK_RIGHT){
-            berserker.setRight(true);
+            berserker.movement.setRight(true);
         }
         if(k== KeyEvent.VK_UP){
-            berserker.setUp(true);
+            berserker.movement.setUp(true);
         }
         if(k== KeyEvent.VK_DOWN){
-            berserker.setDown(true);
+            berserker.movement.setDown(true);
         }
         if(k== KeyEvent.VK_W){
-            berserker.setJumping(true);
+            berserker.movement.setJumping(true);
         }
     }
 }
