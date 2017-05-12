@@ -48,38 +48,38 @@ public class LevelOne implements State {
     @Override
     public void keyPressed(int k) {
         if(k== KeyEvent.VK_LEFT){
-            berserker.movement.setLeft(false);
+            berserker.moveSet.setLeft(false);
         }
         if(k== KeyEvent.VK_RIGHT){
-            berserker.movement.setRight(false);
+            berserker.moveSet.setRight(false);
         }
         if(k== KeyEvent.VK_UP){
-            berserker.movement.setUp(false);
+            berserker.moveSet.setUp(false);
         }
         if(k== KeyEvent.VK_DOWN){
-            berserker.movement.setDown(false);
+            berserker.moveSet.setDown(false);
         }
         if(k== KeyEvent.VK_W){
-            berserker.movement.setJumping(false);
+            berserker.moveSet.setJumping(false);
         }
     }
 
     @Override
     public void keyReleased(int k) {
         if(k== KeyEvent.VK_LEFT){
-            berserker.movement.setLeft(true);
+            berserker.moveSet.setLeft(true);
         }
         if(k== KeyEvent.VK_RIGHT){
-            berserker.movement.setRight(true);
+            berserker.moveSet.setRight(true);
         }
         if(k== KeyEvent.VK_UP){
-            berserker.movement.setUp(true);
+            berserker.moveSet.setUp(true);
         }
         if(k== KeyEvent.VK_DOWN){
-            berserker.movement.setDown(true);
+            berserker.moveSet.setDown(true);
         }
         if(k== KeyEvent.VK_W){
-            berserker.movement.setJumping(true);
+            berserker.moveSet.setJumping(true);
         }
     }
 }

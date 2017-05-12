@@ -3,7 +3,7 @@ package core;
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
  */
-public class CharacterMovement {
+public class CharacterMoveSet {
 
     protected boolean left;
     protected boolean right;

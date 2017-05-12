@@ -1,7 +1,7 @@
 package entities;
 
-import core.*;
 import core.Character;
+import core.*;
 import tilemaps.TileMap;
 
 import javax.imageio.ImageIO;
@@ -9,37 +9,25 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Berserker{
+public class Berserker {
     private Character character = new Character(5, 5, 2500, 2500, false, false, 0, false, 200, 5, false, 8, 40, false, new ArrayList<>());
     private CharacterAction action = new CharacterActionBuilder().buildAnimations();
-    public CharacterMovement movement = new CharacterMovement();
+    public CharacterMoveSet moveSet = new CharacterMoveSet();
     public CharacterCollisionDetection collision;
+    private Movement movement;
     protected int width;
     protected int height;
-    protected double moveSpeed;
-    protected double maxSpeed;
-    protected double stopSpeed;
-    protected double fallSpeed;
-    protected double maxFallSpeed;
-    protected double jumpStart;
-    protected double stopJumpSpeed;
-    protected Visualization animation;
-    protected int currentAction;
+    protected Visualization visualization;
     protected boolean facingRight;
+    protected int currentAction;
 
     public Berserker(TileMap tm) {
         collision = new CharacterCollisionDetection(tm);
+        movement = new Movement(0.3, 1.6, 0.4, 0.15, 4.0, -4.8, 0.3);
         width = 30;
         height = 30;
         collision.cwidth = 20;
         collision.cheight = 20;
-        moveSpeed = 0.3;
-        maxSpeed = 1.6;
-        stopSpeed = 0.4;
-        fallSpeed = 0.15;
-        maxFallSpeed = 4.0;
-        jumpStart = -4.8;
-        stopJumpSpeed = 0.3;
         facingRight = true;
         try {
             BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Sprites/player/playersprites.gif")
@@ -59,53 +47,53 @@ public class Berserker{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        animation = new Visualization();
+        visualization = new Visualization();
         currentAction = action.idle;
-        animation.setFrames(character.sprites.get(action.idle));
-        animation.setDelay(400);
+        visualization.setFrames(character.sprites.get(action.idle));
+        visualization.setDelay(400);
     }
 
     private void getNextPosition() {
-        if (movement.getLeft()) {
-            collision.dx -= moveSpeed;
-            if (collision.dx < -maxSpeed) {
-                collision.dx = -maxSpeed;
+        if (moveSet.getLeft()) {
+            collision.dx -= movement.moveSpeed;
+            if (collision.dx < -movement.maxSpeed) {
+                collision.dx = -movement.maxSpeed;
             }
-        } else if (movement.getRight()) {
-            collision.dx += moveSpeed;
-            if (collision.dx > maxSpeed) {
-                collision.dx = maxSpeed;
+        } else if (moveSet.getRight()) {
+            collision.dx += movement.moveSpeed;
+            if (collision.dx > movement.maxSpeed) {
+                collision.dx = movement.maxSpeed;
             }
         } else {
             if (collision.dx > 0) {
-                collision.dx -= stopSpeed;
+                collision.dx -= movement.stopSpeed;
                 if (collision.dx < 0) {
                     collision.dx = 0;
                 }
             } else if (collision.dx < 0) {
-                collision.dx += stopSpeed;
+                collision.dx += movement.stopSpeed;
                 if (collision.dx > 0) {
                     collision.dx = 0;
                 }
             }
         }
-        if ((currentAction == action.scratching || currentAction == action.fireball) && !(movement.getJumping() || collision.falling)) {
+        if ((currentAction == action.scratching || currentAction == action.fireball) && !(moveSet.getJumping() || collision.falling)) {
             collision.dx = 0;
         }
-        if (movement.getJumping() && !collision.falling) {
-            collision.dy = jumpStart;
+        if (moveSet.getJumping() && !collision.falling) {
+            collision.dy = movement.jumpStart;
             collision.falling = true;
         }
         if (collision.falling) {
-            collision.dy += fallSpeed;
+            collision.dy += movement.fallSpeed;
             if (collision.dy > 0) {
-                movement.setJumping(false);
+                moveSet.setJumping(false);
             }
-            if (collision.dy < 0 && !movement.getJumping()) {
-                collision.dy += stopJumpSpeed;
+            if (collision.dy < 0 && !moveSet.getJumping()) {
+                collision.dy += movement.stopJumpSpeed;
             }
-            if (collision.dy > maxFallSpeed) {
-                collision.dy = maxFallSpeed;
+            if (collision.dy > movement.maxFallSpeed) {
+                collision.dy = movement.maxFallSpeed;
             }
         }
     }
@@ -117,52 +105,52 @@ public class Berserker{
         if (character.scratching) {
             if (currentAction != action.scratching) {
                 currentAction = action.scratching;
-                animation.setFrames(character.sprites.get(action.scratching));
-                animation.setDelay(50);
+                visualization.setFrames(character.sprites.get(action.scratching));
+                visualization.setDelay(50);
                 width = 60;
             }
         } else if (character.firing) {
             if (currentAction != action.fireball) {
                 currentAction = action.fireball;
-                animation.setFrames(character.sprites.get(action.fireball));
-                animation.setDelay(100);
+                visualization.setFrames(character.sprites.get(action.fireball));
+                visualization.setDelay(100);
                 width = 30;
             }
         } else if (collision.dy > 0) {
             if (currentAction != action.falling) {
                 currentAction = action.falling;
-                animation.setFrames(character.sprites.get(action.falling));
-                animation.setDelay(100);
+                visualization.setFrames(character.sprites.get(action.falling));
+                visualization.setDelay(100);
                 width = 30;
             }
         } else if (collision.dy < 0) {
             if (currentAction != action.jumping) {
                 currentAction = action.jumping;
-                animation.setFrames(character.sprites.get(action.jumping));
-                animation.setDelay(-1);
+                visualization.setFrames(character.sprites.get(action.jumping));
+                visualization.setDelay(-1);
                 width = 30;
             }
-        } else if (movement.getLeft() || movement.getRight()) {
+        } else if (moveSet.getLeft() || moveSet.getRight()) {
             if (currentAction != action.walking) {
                 currentAction = action.walking;
-                animation.setFrames(character.sprites.get(action.walking));
-                animation.setDelay(40);
+                visualization.setFrames(character.sprites.get(action.walking));
+                visualization.setDelay(40);
                 width = 30;
             }
         } else {
             if (currentAction != action.idle) {
                 currentAction = action.idle;
-                animation.setFrames(character.sprites.get(action.idle));
-                animation.setDelay(400);
+                visualization.setFrames(character.sprites.get(action.idle));
+                visualization.setDelay(400);
                 width = 30;
             }
         }
-        animation.update();
+        visualization.update();
         if (currentAction != action.scratching && currentAction != action.fireball) {
-            if (movement.getRight()) {
+            if (moveSet.getRight()) {
                 facingRight = true;
             }
-            if (movement.getLeft()) {
+            if (moveSet.getLeft()) {
                 facingRight = false;
             }
         }
@@ -177,9 +165,9 @@ public class Berserker{
             }
         }
         if (facingRight) {
-            g.drawImage(animation.getImage(), (int) ( collision.characterMapPlacement.x +  collision.characterMapPlacement.xmap - width / 2), (int) ( collision.characterMapPlacement.y +  collision.characterMapPlacement.ymap - height / 2), null);
+            g.drawImage(visualization.getImage(), (int) (collision.characterMapPlacement.x + collision.characterMapPlacement.xmap - width / 2), (int) (collision.characterMapPlacement.y + collision.characterMapPlacement.ymap - height / 2), null);
         } else {
-            g.drawImage(animation.getImage(), (int) ( collision.characterMapPlacement.x +  collision.characterMapPlacement.xmap - width / 2 + width), (int) ( collision.characterMapPlacement.y +  collision.characterMapPlacement.ymap - height / 2), -width, height, null);
+            g.drawImage(visualization.getImage(), (int) (collision.characterMapPlacement.x + collision.characterMapPlacement.xmap - width / 2 + width), (int) (collision.characterMapPlacement.y + collision.characterMapPlacement.ymap - height / 2), -width, height, null);
         }
     }
 }
