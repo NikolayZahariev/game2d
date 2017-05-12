@@ -24,7 +24,7 @@ public class TileMap {
     private int numCols;
     private int width;
     private int height;
-    private BufferedImage tileset;
+    private BufferedImage bufferedImage;
     private int numTilesAcross;
     private Tile[][] tiles;
     private int rowOffset;
@@ -41,15 +41,15 @@ public class TileMap {
 
     public void loadTiles(String s) {
         try {
-            tileset = ImageIO.read(getClass().getResourceAsStream(s));
-            numTilesAcross = tileset.getWidth() / tileSize;
+            bufferedImage = ImageIO.read(getClass().getResourceAsStream(s));
+            numTilesAcross = bufferedImage.getWidth() / tileSize;
             tiles = new Tile[2][numTilesAcross];
             BufferedImage subimage;
             for (int col = 0; col < numTilesAcross; col++) {
-                subimage = tileset.getSubimage(col * tileSize, 0, tileSize, tileSize);
+                subimage = bufferedImage.getSubimage(col * tileSize, 0, tileSize, tileSize);
                 tile = new Tile(subimage, 1);
                 tiles[0][col] = new Tile(subimage, tile.NORMAL);
-                subimage = tileset.getSubimage(col * tileSize, tileSize, tileSize, tileSize);
+                subimage = bufferedImage.getSubimage(col * tileSize, tileSize, tileSize, tileSize);
                 tiles[1][col] = new Tile(subimage, tile.BLOCKED);
             }
         } catch (Exception e) {
@@ -118,6 +118,20 @@ public class TileMap {
         rowOffset = (int) -this.y / tileSize;
     }
 
+    public void draw(Graphics g) {
+        for (int row = rowOffset; row < rowOffset + numRowsToDraw; row++) {
+            if (row >= numRows) break;
+            for (int col = colOffset; col < colOffset + numColsToDraw; col++) {
+                if (col >= numCols) break;
+                if (map[row][col] == 0) continue;
+                int rc = map[row][col];
+                int r = rc / numTilesAcross;
+                int c = rc % numTilesAcross;
+                g.drawImage(tiles[r][c].getImage(), (int) x + col * tileSize, (int) y + row * tileSize, null);
+            }
+        }
+    }
+
     private void fixBounds() {
         if (x < xmin) {
             x = xmin;
@@ -130,20 +144,6 @@ public class TileMap {
         }
         if (y > ymax) {
             y = ymax;
-        }
-    }
-
-    public void draw(Graphics g) {
-        for (int row = rowOffset; row < rowOffset + numRowsToDraw; row++) {
-            if (row >= numRows) break;
-            for (int col = colOffset; col < colOffset + numColsToDraw; col++) {
-                if (col >= numCols) break;
-                if (map[row][col] == 0) continue;
-                int rc = map[row][col];
-                int r = rc / numTilesAcross;
-                int c = rc % numTilesAcross;
-                g.drawImage(tiles[r][c].getImage(), (int) x + col * tileSize, (int) y + row * tileSize, null);
-            }
         }
     }
 }

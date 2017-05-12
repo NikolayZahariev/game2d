@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
  * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
  */
 public class GamePanel extends JPanel implements Runnable, KeyListener {
+    public static StateManager stateManager = new StateManager();
     public static final int WIDTH = 320;
     public static final int HEIGHT = 240;
     public static final int SCALE = 2;
@@ -21,7 +22,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     private long targetTime = 1000 / FPS;
     private BufferedImage image;
     private Graphics graphics;
-    public static StateManager stateManager = new StateManager();
 
     public GamePanel() {
         super();

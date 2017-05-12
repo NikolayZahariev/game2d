@@ -1,12 +1,13 @@
 package core;
 
+import entities.character.MapPlacement;
 import tilemaps.Tile;
 import tilemaps.TileMap;
 
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
  */
-public class CharacterCollisionDetection {
+public class CollisionDetection {
     protected TileMap tileMap;
     protected int tileSize;
     public double dx;
@@ -24,29 +25,12 @@ public class CharacterCollisionDetection {
     protected boolean bottomLeft;
     protected boolean bottomRight;
     public boolean falling;
-    public CharacterMapPlacement characterMapPlacement;
+    public MapPlacement characterMapPlacement;
 
-    public CharacterCollisionDetection(TileMap tm) {
-        tileMap = tm;
-        tileSize = tm.getTileSize();
-        characterMapPlacement = new CharacterMapPlacement(tileMap);
-    }
-
-    public void calculateCorners(double x, double y) {
-        int leftTile = (int) (x - cwidth / 2) / tileSize;
-        int rightTile = (int) (x + cwidth / 2 - 1) / tileSize;
-        int topTile = (int) (y - cheight / 2) / tileSize;
-        int bottomTile = (int) (y + cheight / 2 - 1) / tileSize;
-
-        int tl = tileMap.getType(topTile, leftTile);
-        int tr = tileMap.getType(topTile, rightTile);
-        int bl = tileMap.getType(bottomTile, leftTile);
-        int br = tileMap.getType(bottomTile, rightTile);
-
-        topLeft = tl == Tile.BLOCKED;
-        topRight = tr == Tile.BLOCKED;
-        bottomLeft = bl == Tile.BLOCKED;
-        bottomRight = br == Tile.BLOCKED;
+    public CollisionDetection(TileMap tileMap) {
+        this.tileMap = tileMap;
+        tileSize = tileMap.getTileSize();
+        characterMapPlacement = new MapPlacement(this.tileMap);
     }
 
     public void checkTileMapCollision() {
@@ -105,5 +89,22 @@ public class CharacterCollisionDetection {
                 falling = true;
             }
         }
+    }
+
+    private void calculateCorners(double x, double y) {
+        int leftTile = (int) (x - cwidth / 2) / tileSize;
+        int rightTile = (int) (x + cwidth / 2 - 1) / tileSize;
+        int topTile = (int) (y - cheight / 2) / tileSize;
+        int bottomTile = (int) (y + cheight / 2 - 1) / tileSize;
+
+        int tl = tileMap.getType(topTile, leftTile);
+        int tr = tileMap.getType(topTile, rightTile);
+        int bl = tileMap.getType(bottomTile, leftTile);
+        int br = tileMap.getType(bottomTile, rightTile);
+
+        topLeft = tl == Tile.BLOCKED;
+        topRight = tr == Tile.BLOCKED;
+        bottomLeft = bl == Tile.BLOCKED;
+        bottomRight = br == Tile.BLOCKED;
     }
 }

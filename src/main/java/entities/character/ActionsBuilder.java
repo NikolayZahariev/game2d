@@ -1,9 +1,9 @@
-package core;
+package entities.character;
 
 /**
  * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
  */
-public class CharacterActionBuilder {
+public class ActionsBuilder {
     public int idle = 0;
     public int walking = 1;
     public int jumping = 2;
@@ -13,41 +13,41 @@ public class CharacterActionBuilder {
     public int scratching = 6;
 
 
-    public CharacterActionBuilder idle(int idle) {
+    public ActionsBuilder idle(int idle) {
         this.idle = idle;
         return this;
     }
 
-    public CharacterActionBuilder walking(int walking) {
+    public ActionsBuilder walking(int walking) {
         this.walking = walking;
         return this;
     }
 
-    public CharacterActionBuilder jumping(int jumping) {
+    public ActionsBuilder jumping(int jumping) {
         this.jumping = jumping;
         return this;
     }
 
-    public CharacterActionBuilder falling(int falling) {
+    public ActionsBuilder falling(int falling) {
         this.falling = falling;
         return this;
     }
 
-    public CharacterActionBuilder gliding(int gliding) {
+    public ActionsBuilder gliding(int gliding) {
         this.gliding = gliding;
         return this;
     }
 
-    public CharacterActionBuilder fireball(int items) {
+    public ActionsBuilder fireball(int items) {
         this.fireball = fireball;
         return this;
     }
-    public CharacterActionBuilder scratching(int scratching) {
+    public ActionsBuilder scratching(int scratching) {
         this.scratching = scratching;
         return this;
     }
 
-    public CharacterAction buildAnimations() {
-        return new CharacterAction(idle, walking, jumping, falling, gliding, falling, scratching);
+    public Actions buildAnimations() {
+        return new Actions(idle, walking, jumping, falling, gliding, falling, scratching);
     }
 }

@@ -1,6 +1,6 @@
 package states;
 
-import core.State;
+import main.State;
 import entities.Berserker;
 import main.GamePanel;
 import tilemaps.Background;
@@ -47,39 +47,27 @@ public class LevelOne implements State {
 
     @Override
     public void keyPressed(int k) {
-        if(k== KeyEvent.VK_LEFT){
-            berserker.moveSet.setLeft(false);
+        if (k == KeyEvent.VK_LEFT) {
+            berserker.moveSet.left = false;
         }
-        if(k== KeyEvent.VK_RIGHT){
-            berserker.moveSet.setRight(false);
+        if (k == KeyEvent.VK_RIGHT) {
+            berserker.moveSet.right = false;
         }
-        if(k== KeyEvent.VK_UP){
-            berserker.moveSet.setUp(false);
-        }
-        if(k== KeyEvent.VK_DOWN){
-            berserker.moveSet.setDown(false);
-        }
-        if(k== KeyEvent.VK_W){
-            berserker.moveSet.setJumping(false);
+        if (k == KeyEvent.VK_W | k == KeyEvent.VK_UP) {
+            berserker.moveSet.jumping = false;
         }
     }
 
     @Override
     public void keyReleased(int k) {
-        if(k== KeyEvent.VK_LEFT){
-            berserker.moveSet.setLeft(true);
+        if (k == KeyEvent.VK_LEFT) {
+            berserker.moveSet.left = true;
         }
-        if(k== KeyEvent.VK_RIGHT){
-            berserker.moveSet.setRight(true);
+        if (k == KeyEvent.VK_RIGHT) {
+            berserker.moveSet.right = true;
         }
-        if(k== KeyEvent.VK_UP){
-            berserker.moveSet.setUp(true);
-        }
-        if(k== KeyEvent.VK_DOWN){
-            berserker.moveSet.setDown(true);
-        }
-        if(k== KeyEvent.VK_W){
-            berserker.moveSet.setJumping(true);
+        if (k == KeyEvent.VK_W | k == KeyEvent.VK_UP) {
+            berserker.moveSet.jumping = true;
         }
     }
 }

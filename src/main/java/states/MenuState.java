@@ -1,6 +1,6 @@
 package states;
 
-import core.State;
+import main.State;
 import main.GamePanel;
 import tilemaps.Background;
 

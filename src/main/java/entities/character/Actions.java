@@ -1,9 +1,9 @@
-package core;
+package entities.character;
 
 /**
  * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
  */
-public class CharacterAction {
+public class Actions {
     public int idle;
     public int walking;
     public int jumping;
@@ -12,7 +12,7 @@ public class CharacterAction {
     public int fireball;
     public int scratching;
 
-    public CharacterAction(int idle, int walking, int jumping, int falling, int gliding, int fireball, int scratching) {
+    public Actions(int idle, int walking, int jumping, int falling, int gliding, int fireball, int scratching) {
         this.idle = idle;
         this.walking = walking;
         this.jumping = jumping;
@@ -27,7 +27,7 @@ public class CharacterAction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CharacterAction that = (CharacterAction) o;
+        Actions that = (Actions) o;
 
         if (idle != that.idle) return false;
         if (walking != that.walking) return false;
@@ -52,7 +52,7 @@ public class CharacterAction {
 
     @Override
     public String toString() {
-        return "CharacterAction{" +
+        return "Actions{" +
                 "idle=" + idle +
                 ", walking=" + walking +
                 ", jumping=" + jumping +

@@ -1,11 +1,11 @@
-package core;
+package entities.character;
 
 import tilemaps.TileMap;
 
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
  */
-public class CharacterMapPlacement {
+public class MapPlacement {
 
     protected TileMap tileMap;
     public double xmap;
@@ -13,8 +13,8 @@ public class CharacterMapPlacement {
     public double x;
     public double y;
 
-    public CharacterMapPlacement(TileMap tm) {
-        tileMap = tm;
+    public MapPlacement(TileMap tileMap) {
+        this.tileMap = tileMap;
     }
 
     public int getx() {
