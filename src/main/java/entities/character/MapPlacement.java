@@ -26,8 +26,8 @@ public class MapPlacement {
     }
 
     public void setMapPosition() {
-        xmap = tileMap.getx();
-        ymap = tileMap.gety();
+        xmap = tileMap.mapLoading.getx();
+        ymap = tileMap.mapLoading.gety();
     }
 
     public void setPosition(double x, double y) {
