@@ -23,7 +23,15 @@ public class StateManager {
         states.add(new CharState());
         states.add(new SettingsState());
         states.add(new HelpState());
-        states.add(new LevelOne());
+    }
+
+    public StateManager(int hero) {
+        currentState = MENUSTATE;
+        states.add(new MenuState());
+        states.add(new CharState());
+        states.add(new SettingsState());
+        states.add(new HelpState());
+        states.add(new LevelOne(hero));
     }
 
     public void setState(int state){

@@ -6,12 +6,11 @@ import tilemaps.TileMap;
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
  */
 public class MapPlacement {
-
-    protected TileMap tileMap;
     public double xmap;
     public double ymap;
     public double x;
     public double y;
+    private TileMap tileMap;
 
     public MapPlacement(TileMap tileMap) {
         this.tileMap = tileMap;

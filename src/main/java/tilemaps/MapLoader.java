@@ -8,21 +8,21 @@ import java.io.InputStreamReader;
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
  */
-public class MapLoading {
+public class MapLoader {
     public int numRows;
     public int numCols;
+    public int tileSize;
+    public int[][] map;
+    public double x;
+    public double y;
     private int width;
     private int height;
     private int xmin;
     private int ymin;
     private int xmax;
     private int ymax;
-    public int tileSize;
-    public int[][] map;
-    public double x;
-    public double y;
 
-    public MapLoading(int tileSize){
+    public MapLoader(int tileSize){
         this.tileSize = tileSize;
     }
 
@@ -52,6 +52,14 @@ public class MapLoading {
         }
     }
 
+    public int getx() {
+        return (int) x;
+    }
+
+    public int gety() {
+        return (int) y;
+    }
+
     protected void fixBounds() {
         if (x < xmin) {
             x = xmin;
@@ -65,13 +73,5 @@ public class MapLoading {
         if (y > ymax) {
             y = ymax;
         }
-    }
-
-    public int getx() {
-        return (int) x;
-    }
-
-    public int gety() {
-        return (int) y;
     }
 }

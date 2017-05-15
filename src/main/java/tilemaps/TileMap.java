@@ -2,14 +2,11 @@ package tilemaps;
 
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class TileMap {
+    public TileLoader tileLoading;
+    public MapLoader mapLoading;
     private double tween;
     private int tileSize;
     private int rowOffset;
@@ -17,13 +14,10 @@ public class TileMap {
     private int numRowsToDraw;
     private int numColsToDraw;
 
-    public TileLoading tileLoading;
-    public MapLoading mapLoading;
-
     public TileMap(int tileSize) {
         this.tileSize = tileSize;
-        tileLoading = new TileLoading(this.tileSize);
-        mapLoading = new MapLoading(this.tileSize);
+        tileLoading = new TileLoader(tileSize);
+        mapLoading = new MapLoader(tileSize);
         numRowsToDraw = GamePanel.HEIGHT / tileSize + 2;
         numColsToDraw = GamePanel.WIDTH / tileSize + 2;
         tween = 0.07;

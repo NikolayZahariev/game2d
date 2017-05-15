@@ -6,14 +6,14 @@ import java.awt.image.BufferedImage;
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
  */
-public class TileLoading {
-    private Tile tile;
-    private BufferedImage bufferedImage;
+public class TileLoader {
     public int numTilesAcross;
     public Tile[][] tiles;
     public int tileSize;
+    private Tile tile;
+    private BufferedImage bufferedImage;
 
-    public TileLoading(int tileSize){
+    public TileLoader(int tileSize){
         this.tileSize = tileSize;
     }
 
