@@ -2,20 +2,20 @@ package entities;
 
 import core.CollisionDetection;
 import core.SpriteDimensions;
+import core.SpriteSheet;
 import core.Visualization;
 import entities.character.*;
 import entities.character.Character;
 import tilemaps.TileMap;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Berserker {
     public CollisionDetection collision;
     public MoveSet moveSet = new MoveSet(false, false, false, false, false);
     private SpriteDimensions spriteDimensions;
+    private SpriteSheet spriteSheet = new SpriteSheet("/sprites/player/playersprites.gif", 7);
     private Character character = new Character(5, 5, 2500, 2500, false, false, 0, false, 200, 5, false, 8, 40, false, new ArrayList<>());
     private Actions action = new ActionsBuilder().buildAnimations();
     private Movement movement;
@@ -30,24 +30,7 @@ public class Berserker {
         collision.cwidth = 20;
         collision.cheight = 20;
         facingRight = true;
-        try {
-            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Sprites/player/playersprites.gif")
-            );
-            character.sprites = new ArrayList<>();
-            for (int i = 0; i < 7; i++) {
-                BufferedImage[] bi = new BufferedImage[character.numFrames[i]];
-                for (int j = 0; j < character.numFrames[i]; j++) {
-                    if (i != 6) {
-                        bi[j] = spritesheet.getSubimage(j * spriteDimensions.width, i * spriteDimensions.height, spriteDimensions.width, spriteDimensions.height);
-                    } else {
-                        bi[j] = spritesheet.getSubimage(j * spriteDimensions.width * 2, i * spriteDimensions.height, spriteDimensions.width, spriteDimensions.height);
-                    }
-                }
-                character.sprites.add(bi);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        spriteSheet.getSpriteSheet(character, spriteDimensions);
         visualization = new Visualization();
         currentAction = action.idle;
         visualization.setFrames(character.sprites.get(action.idle));
