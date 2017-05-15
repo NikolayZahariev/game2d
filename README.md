@@ -10,7 +10,7 @@ git fetch upstream
 
 git rebase upstream/master
 
-git push origin
+git push origin BRANCH
 
 ## Commit/Push
 
@@ -47,6 +47,6 @@ git add .
 
 git commit --amend
 
-git push origin --force
+git push origin BRANCH --force
 
 <b>WARNING:</b> --force will make you lose the old progress
