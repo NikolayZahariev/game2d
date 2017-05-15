@@ -16,7 +16,7 @@ public class Berserker {
     public MoveSet moveSet = new MoveSet(false, false, false, false, false);
     private SpriteDimensions spriteDimensions;
     private SpriteSheet spriteSheet = new SpriteSheet("/sprites/player/playersprites.gif", 7);
-    private Character character = new Character(5, 5, 2500, 2500, false, false, 0, false, 200, 5, false, 8, 40, false, new ArrayList<>());
+    private Character character = new Character(5, 5, 2500, 2500, false, false, 0, false, 200, 5, false, 8, 40, false, new ArrayList<>(), new int[]{2, 8, 1, 2, 4, 2, 5});
     private Actions action = new ActionsBuilder().buildAnimations();
     private Movement movement;
     private Visualization visualization;

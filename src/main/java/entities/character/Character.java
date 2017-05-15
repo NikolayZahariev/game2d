@@ -22,9 +22,9 @@ public class Character {
     public int scratchRange;
     public boolean gliding;
     public ArrayList<BufferedImage[]> sprites;
-    public final int[] numFrames = {2, 8, 1, 2, 4, 2, 5};
+    public int[] numFrames;
 
-    public Character(int health, int maxHealth, int fire, int maxFire, boolean dead, boolean flinching, long flinchTimer, boolean firing, int fireCost, int fireBallDamage, boolean scratching, int scratchDamage, int scratchRange, boolean gliding, ArrayList<BufferedImage[]> sprites) {
+    public Character(int health, int maxHealth, int fire, int maxFire, boolean dead, boolean flinching, long flinchTimer, boolean firing, int fireCost, int fireBallDamage, boolean scratching, int scratchDamage, int scratchRange, boolean gliding, ArrayList<BufferedImage[]> sprites, int[] numFrames) {
         this.health = health;
         this.maxHealth = maxHealth;
         this.fire = fire;
@@ -40,5 +40,6 @@ public class Character {
         this.scratchRange = scratchRange;
         this.gliding = gliding;
         this.sprites = sprites;
+        this.numFrames = numFrames;
     }
 }
