@@ -34,31 +34,30 @@ public class LevelOne implements State {
         berserker = new Berserker(tileMap);
         berserker.collision.characterMapPlacement.setPosition(100, 100);
 
-        enemies = new ArrayList<TestEnemy>();
+        enemies = new ArrayList<>();
 
-        TestEnemy s;
-        Point[] points = new Point[] {
-                new Point(100, 100),
-                new Point(120, 120),
-                new Point(1525, 200),
-                new Point(1680, 200),
-                new Point(1800, 200)
+        TestEnemy testEnemy;
+        Point[] points = new Point[]{
+                new Point(150, 150),
         };
-        for(int i = 0; i < points.length; i++) {
-            s = new TestEnemy(tileMap);
-            s.collision.characterMapPlacement.setPosition(points[i].x, points[i].y);
-            enemies.add(s);
+        for (Point point : points) {
+            testEnemy = new TestEnemy(tileMap);
+            testEnemy.collision.characterMapPlacement.setPosition(point.x, point.y);
+            enemies.add(testEnemy);
         }
     }
 
     @Override
     public void update() {
         berserker.update();
+
+        berserker.checkAttack(enemies);
+
         tileMap.setPosition(GamePanel.WIDTH / 2 - berserker.collision.characterMapPlacement.getx(), GamePanel.HEIGHT / 2 - berserker.collision.characterMapPlacement.gety());
-        for(int i = 0; i < enemies.size(); i++) {
+        for (int i = 0; i < enemies.size(); i++) {
             TestEnemy e = enemies.get(i);
             e.update();
-            if(e.enemy.isDead()) {
+            if (e.enemy.isDead()) {
                 enemies.remove(i);
                 i--;
             }
@@ -70,7 +69,7 @@ public class LevelOne implements State {
         background.draw(g);
         tileMap.draw(g);
         berserker.draw(g);
-        for(int i = 0; i < enemies.size(); i++) {
+        for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).draw(g);
         }
     }

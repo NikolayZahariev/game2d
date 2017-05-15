@@ -18,18 +18,17 @@ import tilemaps.TileMap;
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
  */
-public class TestEnemy{
-    private BufferedImage[] sprites;
+public class TestEnemy {
     public CollisionDetection collision;
     public MoveSet moveSet = new MoveSet(false, false, false, false, false);
     private SpriteSheet spriteSheet = new SpriteSheet("/sprites/enemies/slugger.gif", 1);
     private SpriteDimensions spriteDimensions;
-    private EnemyStats enemyStats = new EnemyStats(2, 2, 2500, 2500, false, false, 0, false, 200, 1, new ArrayList<>(), new int[] {1});
+    private EnemyStats enemyStats = new EnemyStats(2, 2, 2500, 2500, false, false, 0, false, 200, 1, new ArrayList<>(), new int[]{1});
     private Actions action = new ActionsBuilder().buildAnimations();
     private Movement movement;
     private Visualization visualization;
     private boolean facingRight;
-    public Enemy enemy = new Enemy();
+    public Enemy enemy = new Enemy(enemyStats);
 
     public TestEnemy(TileMap tileMap) {
         collision = new CollisionDetection(tileMap);
@@ -45,74 +44,64 @@ public class TestEnemy{
     }
 
     private void getNextPosition() {
-        // movement
-        if(moveSet.left) {
+        if (moveSet.left) {
             collision.dx -= movement.moveSpeed;
-            if(collision.dx < -movement.maxSpeed) {
+            if (collision.dx < -movement.maxSpeed) {
                 collision.dx = -movement.maxSpeed;
             }
-        }
-        else if(moveSet.right) {
+        } else if (moveSet.right) {
             collision.dx += movement.moveSpeed;
-            if(collision.dx > movement.maxSpeed) {
+            if (collision.dx > movement.maxSpeed) {
                 collision.dx = movement.maxSpeed;
             }
         }
 
-        // falling
-        if(collision.falling) {
+        if (collision.falling) {
             collision.dy += movement.fallSpeed;
         }
-
     }
 
     public void update() {
-        // update position
         getNextPosition();
         collision.checkTileMapCollision();
         collision.characterMapPlacement.setPosition(collision.xtemp, collision.ytemp);
 
-        // check flinching
-        if(enemy.flinching) {
+        if (enemy.flinching) {
             long elapsed =
                     (System.nanoTime() - enemy.flinchTimer) / 1000000;
-            if(elapsed > 400) {
+            if (elapsed > 400) {
                 enemy.flinching = false;
             }
         }
 
-        // if it hits a wall, go other direction
-        if(moveSet.right && collision.dx == 0) {
+        if (moveSet.right && collision.dx == 0) {
             moveSet.right = false;
             moveSet.left = true;
             facingRight = false;
-        }
-        else if(moveSet.left && collision.dx == 0) {
+        } else if (moveSet.left && collision.dx == 0) {
             moveSet.right = true;
             moveSet.left = false;
             facingRight = true;
         }
 
-        // update animation
         visualization.update();
 
     }
 
     public void draw(Graphics g) {
         collision.characterMapPlacement.setMapPosition();
-        if(facingRight) {
+        if (facingRight) {
             g.drawImage(
                     visualization.getImage(),
-                    (int)(collision.characterMapPlacement.x + collision.characterMapPlacement.xmap - spriteDimensions.width / 2),
-                    (int)(collision.characterMapPlacement.y + collision.characterMapPlacement.ymap - spriteDimensions.height / 2),
+                    (int) (collision.characterMapPlacement.x + collision.characterMapPlacement.xmap - spriteDimensions.width / 2),
+                    (int) (collision.characterMapPlacement.y + collision.characterMapPlacement.ymap - spriteDimensions.height / 2),
                     null
-                );
-        }
-        else {
+            );
+        } else {
             g.drawImage(
                     visualization.getImage(),
-                    (int)(collision.characterMapPlacement.x + collision.characterMapPlacement.xmap - spriteDimensions.width / 2 + spriteDimensions.width),
-                    (int)(collision.characterMapPlacement.y + collision.characterMapPlacement.ymap - spriteDimensions.height / 2),
+                    (int) (collision.characterMapPlacement.x + collision.characterMapPlacement.xmap - spriteDimensions.width / 2 + spriteDimensions.width),
+                    (int) (collision.characterMapPlacement.y + collision.characterMapPlacement.ymap - spriteDimensions.height / 2),
                     -spriteDimensions.width,
                     spriteDimensions.height,
                     null

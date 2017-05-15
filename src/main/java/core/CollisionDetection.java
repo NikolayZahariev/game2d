@@ -1,8 +1,11 @@
 package core;
 
 import entities.character.MapPlacement;
+import entities.enemies.TestEnemy;
 import tilemaps.Tile;
 import tilemaps.TileMap;
+
+import java.awt.*;
 
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
@@ -91,6 +94,12 @@ public class CollisionDetection {
         }
     }
 
+    public boolean intersects(TestEnemy enemy) {
+        Rectangle r1 = getRectangle();
+        Rectangle r2 = enemy.collision.getRectangle();
+        return r1.intersects(r2);
+    }
+
     private void calculateCorners(double x, double y) {
         int leftTile = (int) (x - cwidth / 2) / tileSize;
         int rightTile = (int) (x + cwidth / 2 - 1) / tileSize;
@@ -106,5 +115,14 @@ public class CollisionDetection {
         topRight = tr == Tile.BLOCKED;
         bottomLeft = bl == Tile.BLOCKED;
         bottomRight = br == Tile.BLOCKED;
+    }
+
+    public Rectangle getRectangle() {
+        return new Rectangle(
+                (int)characterMapPlacement.x - cwidth,
+                (int)characterMapPlacement.y - cheight,
+                cwidth,
+                cheight
+        );
     }
 }

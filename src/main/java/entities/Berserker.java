@@ -6,6 +6,8 @@ import core.SpriteSheet;
 import core.Visualization;
 import entities.character.*;
 import entities.character.Character;
+import entities.enemies.TestEnemy;
+import main.GamePanel;
 import tilemaps.TileMap;
 
 import java.awt.*;
@@ -16,7 +18,7 @@ public class Berserker {
     public MoveSet moveSet = new MoveSet(false, false, false, false, false);
     private SpriteDimensions spriteDimensions;
     private SpriteSheet spriteSheet = new SpriteSheet("/sprites/player/playersprites.gif", 7);
-    private Character character = new Character(5, 5, 2500, 2500, false, false, 0, false, 200, 5, false, 8, 40, false, new ArrayList<>(), new int[]{2, 8, 1, 2, 4, 2, 5});
+    private Character character = new Character(5, 5, false, false, 0, false, 200, 5, new ArrayList<>(), new int[]{2, 8, 1, 2, 4, 2, 5});
     private Actions action = new ActionsBuilder().buildAnimations();
     private Movement movement;
     private Visualization visualization;
@@ -37,23 +39,63 @@ public class Berserker {
         visualization.setDelay(400);
     }
 
+    public void checkAttack(ArrayList<TestEnemy> enemies) {
+        for (int i = 0; i < enemies.size(); i++) {
+            TestEnemy enemy = enemies.get(i);
+            if (character.attacking) {
+                if (facingRight) {
+                    if (
+                            enemy.collision.characterMapPlacement.getx() > enemy.collision.characterMapPlacement.x &&
+                                    enemy.collision.characterMapPlacement.getx() < enemy.collision.characterMapPlacement.x + character.attackRange &&
+                                    enemy.collision.characterMapPlacement.gety() > enemy.collision.characterMapPlacement.y - spriteDimensions.height / 2 &&
+                                    enemy.collision.characterMapPlacement.gety() < enemy.collision.characterMapPlacement.y + spriteDimensions.height / 2
+                            ) {
+                        enemy.enemy.hit(character.attackDamage);
+                    }
+                } else {
+                    if (
+                            enemy.collision.characterMapPlacement.getx() < enemy.collision.characterMapPlacement.x &&
+                                    enemy.collision.characterMapPlacement.getx() > enemy.collision.characterMapPlacement.x - character.attackRange &&
+                                    enemy.collision.characterMapPlacement.gety() > enemy.collision.characterMapPlacement.y - spriteDimensions.height / 2 &&
+                                    enemy.collision.characterMapPlacement.gety() < enemy.collision.characterMapPlacement.y + spriteDimensions.height / 2
+                            ) {
+                        enemy.enemy.hit(character.attackDamage);
+                    }
+                }
+            }
+
+            if (collision.intersects(enemy)) {
+                hit(enemy.enemy.getDamage());
+            }
+        }
+    }
+
+    public void hit(int damage) {
+        if (character.flinching) {
+            return;
+        }
+        character.health -= damage;
+        if (character.health < 0) {
+            character.health = 0;
+        }
+        if (character.health == 0) {
+            character.dead = true;
+            GamePanel.stateManager.setState(0);
+        }
+        character.flinching = true;
+        character.flinchTimer = System.nanoTime();
+    }
+
     public void update() {
         getNextPosition();
         collision.checkTileMapCollision();
         collision.characterMapPlacement.setPosition(collision.xtemp, collision.ytemp);
-        if (character.scratching) {
+        if (character.attacking) {
             if (currentAction != action.scratching) {
                 currentAction = action.scratching;
                 visualization.setFrames(character.sprites.get(action.scratching));
                 visualization.setDelay(50);
                 spriteDimensions.width = 60;
-            }
-        } else if (character.firing) {
-            if (currentAction != action.fireball) {
-                currentAction = action.fireball;
-                visualization.setFrames(character.sprites.get(action.fireball));
-                visualization.setDelay(100);
-                spriteDimensions.width = 30;
             }
         } else if (collision.dy > 0) {
             if (currentAction != action.falling) {
@@ -84,6 +126,14 @@ public class Berserker {
                 spriteDimensions.width = 30;
             }
         }
+
+        if (character.flinching) {
+            long elapsed = (System.nanoTime() - character.flinchTimer) / 1000000;
+            if (elapsed > 1000) {
+                character.flinching = false;
+            }
+        }
+
         visualization.update();
         if (currentAction != action.scratching && currentAction != action.fireball) {
             if (moveSet.right) {
