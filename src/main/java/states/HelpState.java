@@ -2,6 +2,7 @@ package states;
 
 import main.State;
 import main.GamePanel;
+import states.core.BackgroundStylization;
 import tilemaps.Background;
 
 import java.awt.*;
@@ -11,21 +12,15 @@ import java.awt.event.KeyEvent;
  * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
  */
 public class HelpState implements State {
-    private Background background = new Background(1);
+    private BackgroundStylization stylization = new BackgroundStylization();
     private int currentChoice = 0;
-    private Color titleColor;
-    private Font titleFont;
-    private Font font;
     private String[] options = {
             "HELP",
             "Quit"
     };
 
     public HelpState() {
-        background.getResource("/backgrounds/bg.jpg");
-        titleColor = new Color(0, 173, 255);
-        titleFont = new Font("Times New Roman", Font.PLAIN, 28);
-        font = new Font("Arial Black", Font.PLAIN, 12);
+        stylization.loadBackgroundAndFonts();
     }
 
     @Override
@@ -35,15 +30,15 @@ public class HelpState implements State {
 
     @Override
     public void update() {
-        background.update();
+        stylization.background.update();
     }
 
     @Override
     public void draw(Graphics graphics) {
-        background.draw(graphics);
-        graphics.setColor(titleColor);
-        graphics.setFont(titleFont);
-        graphics.setFont(font);
+        stylization.background.draw(graphics);
+        graphics.setColor(stylization.titleColor);
+        graphics.setFont(stylization.titleFont);
+        graphics.setFont(stylization.font);
         for (int i = 0; i < options.length; i++) {
             if (i == currentChoice) {
                 graphics.setColor(Color.GRAY);

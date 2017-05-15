@@ -1,8 +1,8 @@
 package states;
 
-import main.State;
 import main.GamePanel;
-import tilemaps.Background;
+import main.State;
+import states.core.BackgroundStylization;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -11,11 +11,8 @@ import java.awt.event.KeyEvent;
  * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
  */
 public class MenuState implements State {
-    private Background background = new Background(1);
+    private BackgroundStylization stylization = new BackgroundStylization();
     private int currentChoice = 0;
-    private Color titleColor;
-    private Font titleFont;
-    private Font font;
     private String[] options = {
             "Start",
             "Settings",
@@ -24,10 +21,7 @@ public class MenuState implements State {
     };
 
     public MenuState() {
-        background.getResource("/backgrounds/bg.jpg");
-        titleColor = new Color(0, 173, 255);
-        titleFont = new Font("Times New Roman", Font.PLAIN, 28);
-        font = new Font("Arial Black", Font.PLAIN, 12);
+        stylization.loadBackgroundAndFonts();
     }
 
     @Override
@@ -37,16 +31,16 @@ public class MenuState implements State {
 
     @Override
     public void update() {
-        background.update();
+        stylization.background.update();
     }
 
     @Override
     public void draw(Graphics graphics) {
-        background.draw(graphics);
-        graphics.setColor(titleColor);
-        graphics.setFont(titleFont);
+        stylization.background.draw(graphics);
+        graphics.setColor(stylization.titleColor);
+        graphics.setFont(stylization.titleFont);
         graphics.drawString("Scrub Lords", 100, 70);
-        graphics.setFont(font);
+        graphics.setFont(stylization.font);
         for (int i = 0; i < options.length; i++) {
             if (i == currentChoice) {
                 graphics.setColor(Color.GRAY);
