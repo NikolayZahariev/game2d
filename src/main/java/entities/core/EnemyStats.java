@@ -1,4 +1,4 @@
-package entities.character;
+package entities.core;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

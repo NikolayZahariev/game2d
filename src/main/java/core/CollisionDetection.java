@@ -1,6 +1,6 @@
 package core;
 
-import entities.character.MapPlacement;
+import entities.core.MapPlacement;
 import tilemaps.Tile;
 import tilemaps.TileMap;
 

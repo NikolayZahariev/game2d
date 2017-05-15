@@ -1,7 +1,7 @@
 package core;
 
-import entities.character.Character;
-import entities.character.EnemyStats;
+import entities.core.Character;
+import entities.core.EnemyStats;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

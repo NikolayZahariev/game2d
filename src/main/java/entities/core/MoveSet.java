@@ -1,4 +1,4 @@
-package entities.character;
+package entities.core;
 
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.

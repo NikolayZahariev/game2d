@@ -1,8 +1,6 @@
-package entities.character;
+package entities.core;
 
 import tilemaps.TileMap;
-
-import java.awt.*;
 
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.

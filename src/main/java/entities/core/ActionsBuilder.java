@@ -1,4 +1,4 @@
-package entities.character;
+package entities.core;
 
 /**
  * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.

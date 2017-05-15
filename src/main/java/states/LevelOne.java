@@ -1,8 +1,8 @@
 package states;
 
+import entities.characters.Berserker;
 import entities.enemies.TestEnemy;
 import main.State;
-import entities.*;
 import main.GamePanel;
 import tilemaps.Background;
 import tilemaps.TileMap;

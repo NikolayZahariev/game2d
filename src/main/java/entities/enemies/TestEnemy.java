@@ -4,15 +4,12 @@ import core.CollisionDetection;
 import core.SpriteDimensions;
 import core.SpriteSheet;
 import core.Visualization;
-import entities.*;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import entities.character.*;
-import entities.character.Character;
+import entities.core.*;
 import tilemaps.TileMap;
 
 /**

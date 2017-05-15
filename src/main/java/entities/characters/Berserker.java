@@ -1,11 +1,11 @@
-package entities;
+package entities.characters;
 
 import core.CollisionDetection;
 import core.SpriteDimensions;
 import core.SpriteSheet;
 import core.Visualization;
-import entities.character.*;
-import entities.character.Character;
+import entities.core.*;
+import entities.core.Character;
 import tilemaps.TileMap;
 
 import java.awt.*;
