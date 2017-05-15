@@ -10,16 +10,16 @@ public class Actions {
     public int falling;
     public int gliding;
     public int fireball;
-    public int scratching;
+    public int attacking;
 
-    public Actions(int idle, int walking, int jumping, int falling, int gliding, int fireball, int scratching) {
+    public Actions(int idle, int walking, int jumping, int falling, int gliding, int fireball, int attacking) {
         this.idle = idle;
         this.walking = walking;
         this.jumping = jumping;
         this.falling = falling;
         this.gliding = gliding;
         this.fireball = fireball;
-        this.scratching = scratching;
+        this.attacking = attacking;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Actions {
         if (falling != that.falling) return false;
         if (gliding != that.gliding) return false;
         if (fireball != that.fireball) return false;
-        return scratching == that.scratching;
+        return attacking == that.attacking;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Actions {
         result = 31 * result + falling;
         result = 31 * result + gliding;
         result = 31 * result + fireball;
-        result = 31 * result + scratching;
+        result = 31 * result + attacking;
         return result;
     }
 
@@ -59,7 +59,7 @@ public class Actions {
                 ", falling=" + falling +
                 ", gliding=" + gliding +
                 ", fireball=" + fireball +
-                ", scratching=" + scratching +
+                ", attacking=" + attacking +
                 '}';
     }
 }

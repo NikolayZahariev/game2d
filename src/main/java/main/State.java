@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.

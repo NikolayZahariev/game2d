@@ -9,36 +9,24 @@ import java.util.ArrayList;
 public class Character {
     public int health;
     public int maxHealth;
-    public int fire;
-    public int maxFire;
     public boolean dead;
     public boolean flinching;
     public long flinchTimer;
-    public boolean firing;
-    public int fireCost;
-    public int fireBallDamage;
-    public boolean scratching;
-    public int scratchDamage;
-    public int scratchRange;
-    public boolean gliding;
+    public boolean attacking;
+    public int attackDamage;
+    public int attackRange;
     public ArrayList<BufferedImage[]> sprites;
     public int[] numFrames;
 
-    public Character(int health, int maxHealth, int fire, int maxFire, boolean dead, boolean flinching, long flinchTimer, boolean firing, int fireCost, int fireBallDamage, boolean scratching, int scratchDamage, int scratchRange, boolean gliding, ArrayList<BufferedImage[]> sprites, int[] numFrames) {
+    public Character(int health, int maxHealth, boolean dead, boolean flinching, long flinchTimer, boolean attacking, int attackDamage, int attackRange, ArrayList<BufferedImage[]> sprites, int[] numFrames) {
         this.health = health;
         this.maxHealth = maxHealth;
-        this.fire = fire;
-        this.maxFire = maxFire;
         this.dead = dead;
         this.flinching = flinching;
         this.flinchTimer = flinchTimer;
-        this.firing = firing;
-        this.fireCost = fireCost;
-        this.fireBallDamage = fireBallDamage;
-        this.scratching = scratching;
-        this.scratchDamage = scratchDamage;
-        this.scratchRange = scratchRange;
-        this.gliding = gliding;
+        this.attacking = attacking;
+        this.attackDamage = attackDamage;
+        this.attackRange = attackRange;
         this.sprites = sprites;
         this.numFrames = numFrames;
     }
