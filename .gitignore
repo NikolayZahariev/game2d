@@ -3,6 +3,7 @@
 *out/
 *gradle/
 *build/
+*classes/
 gradlew
 gradlew.bat
 settings.gradle
