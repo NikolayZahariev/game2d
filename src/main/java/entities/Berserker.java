@@ -30,7 +30,7 @@ public class Berserker {
         collision.cwidth = 20;
         collision.cheight = 20;
         facingRight = true;
-        spriteSheet.getSpriteSheet(character, spriteDimensions);
+        spriteSheet.getCharacterSpriteSheet(character, spriteDimensions);
         visualization = new Visualization();
         currentAction = action.idle;
         visualization.setFrames(character.sprites.get(action.idle));

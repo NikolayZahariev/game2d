@@ -2,6 +2,8 @@ package entities.character;
 
 import tilemaps.TileMap;
 
+import java.awt.*;
+
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
  */
@@ -26,8 +28,8 @@ public class MapPlacement {
     }
 
     public void setMapPosition() {
-        xmap = tileMap.getx();
-        ymap = tileMap.gety();
+        xmap = tileMap.mapLoading.getx();
+        ymap = tileMap.mapLoading.gety();
     }
 
     public void setPosition(double x, double y) {
