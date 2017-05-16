@@ -79,7 +79,7 @@ public class CharState extends JPanel implements State {
         switch (currentChoice) {
             case 0:
                 choice = "berserker";
-                GamePanel.stateManager.setState(4);
+                GamePanel.stateManager.setState(1);
             case 1:
                 break;
             case 2:
