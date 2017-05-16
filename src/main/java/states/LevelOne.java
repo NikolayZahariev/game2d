@@ -1,12 +1,11 @@
 package states;
 
-import entities.characters.Berserker;
-import entities.characters.Player;
 import entities.enemies.TestEnemy;
 import main.GamePanel;
 import main.State;
 import tilemaps.Background;
 import tilemaps.TileMap;
+import entities.characters.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
  * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
  */
 public class LevelOne implements State {
-    private TileMap tileMap;
+    public TileMap tileMap;
     private Background background = new Background(0.1);
     private Berserker berserker;
     private Player player;
@@ -34,11 +33,13 @@ public class LevelOne implements State {
         tileMap.setPosition(0, 0);
         background.getResource("/backgrounds/levelone.gif");
         berserker = new Berserker(tileMap);
-        player = new Player(tileMap, berserker.spriteSheet, berserker.character, berserker.movement);
-        player.collision.characterMapPlacement.setPosition(100, 100);
+        if (CharState.choice == "berserker") {
+            player = new Player(tileMap, berserker.spriteSheet, berserker.character, berserker.movement);
+            player.collision.characterMapPlacement.setPosition(100, 100);
+        }
         enemies = new ArrayList<TestEnemy>();
 
-        TestEnemy s;
+        TestEnemy testEnemy;
         Point[] points = new Point[]{
                 new Point(100, 100),
                 new Point(120, 120),
@@ -46,10 +47,10 @@ public class LevelOne implements State {
                 new Point(1680, 200),
                 new Point(1800, 200)
         };
-        for (int i = 0; i < points.length; i++) {
-            s = new TestEnemy(tileMap);
-            s.collision.characterMapPlacement.setPosition(points[i].x, points[i].y);
-            enemies.add(s);
+        for (Point point : points) {
+            testEnemy = new TestEnemy(tileMap);
+            testEnemy.collision.characterMapPlacement.setPosition(point.x, point.y);
+            enemies.add(testEnemy);
         }
     }
 

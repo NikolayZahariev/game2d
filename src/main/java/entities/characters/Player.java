@@ -15,13 +15,13 @@ import java.awt.*;
  */
 public class Player {
     public CollisionDetection collision;
+    public MoveSet moveSet = new MoveSet(false, false, false, false, false);
     private SpriteDimensions spriteDimensions;
     private Movement movement;
     private Visualization visualization;
     private boolean facingRight;
     private int currentAction;
     private Actions action = new ActionsBuilder().buildAnimations();
-    public MoveSet moveSet = new MoveSet(false, false, false, false, false);
     private SpriteSheet spriteSheet;
     private Character character;
 
