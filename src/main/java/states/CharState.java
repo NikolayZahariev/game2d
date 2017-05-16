@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
  * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
  */
 public class CharState implements State {
+    public static String character;
     private BackgroundStylization stylization = new BackgroundStylization();
     private int currentChoice = 0;
     private String[] options = {
@@ -26,7 +27,6 @@ public class CharState implements State {
 
     @Override
     public void init() {
-
     }
 
     @Override
@@ -77,6 +77,7 @@ public class CharState implements State {
     private void select() {
         switch (currentChoice) {
             case 0:
+                character = "berserker";
                 GamePanel.stateManager.setState(4);
             case 1:
                 break;
