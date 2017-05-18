@@ -27,7 +27,7 @@ public class Lich {
     public Lich(TileMap tileMap) {
         collision = new CollisionDetection(tileMap);
         spriteSheet = new SpriteSheet("/sprites/player/lich.png", 7);
-        movement = new Movement(0.6, 1.6, 0.4, 0.15, 4.0, -4.8, 0.3);
+        movement = new Movement(0.9, 3.9, 0.4, 0.15, 4.0, -4.8, 0.3);
         spriteDimensions = new SpriteDimensions(30, 30);
         collision.cwidth = 20;
         collision.cheight = 20;

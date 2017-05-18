@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
  */
-public class TestEnemy {
+public class Slugger {
     public CollisionDetection collision;
     public MoveSet moveSet = new MoveSet(false, false, false, false, false);
     public EnemyStats enemyStats = new EnemyStats(2, 2, false, false, 0, false, 1, new ArrayList<>(), new int[]{1});
@@ -25,7 +25,7 @@ public class TestEnemy {
     private Visualization visualization;
     private boolean facingRight;
 
-    public TestEnemy(TileMap tileMap) {
+    public Slugger(TileMap tileMap) {
         collision = new CollisionDetection(tileMap);
         movement = new Movement(0.3, 1.6, 0.4, 0.15, 4.0, -4.8, 0.3);
         spriteDimensions = new SpriteDimensions(30, 30);
@@ -60,11 +60,11 @@ public class TestEnemy {
         getNextPosition();
         collision.checkTileMapCollision();
         collision.characterMapPlacement.setPosition(collision.xtemp, collision.ytemp);
-        if (enemy.flinching) {
+        if (enemyStats.flinching) {
             long elapsed =
-                    (System.nanoTime() - enemy.flinchTimer) / 1000000;
+                    (System.nanoTime() - enemyStats.flinchTimer) / 1000000;
             if (elapsed > 400) {
-                enemy.flinching = false;
+                enemyStats.flinching = false;
             }
         }
 

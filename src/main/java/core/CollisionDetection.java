@@ -3,7 +3,7 @@ package core;
 import entities.core.MapPlacement;
 import tilemaps.Tile;
 import tilemaps.TileMap;
-import entities.enemies.TestEnemy;
+import entities.enemies.Slugger;
 
 import java.awt.*;
 
@@ -36,7 +36,7 @@ public class CollisionDetection {
         characterMapPlacement = new MapPlacement(this.tileMap);
     }
 
-    public boolean hitboxIntersection(TestEnemy enemy) {
+    public boolean hitboxIntersection(Slugger enemy) {
         Rectangle playerHitbox = getEntityHitbox();
         Rectangle enemyHitbox = enemy.collision.getEntityHitbox();
         return playerHitbox.intersects(enemyHitbox);

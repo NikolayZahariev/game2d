@@ -1,17 +1,11 @@
 package entities.enemies;
 
-import tilemaps.TileMap;
 import entities.core.EnemyStats;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
  */
 public class Enemy {
-    public boolean flinching;
-    public long flinchTimer;
     public EnemyStats enemyStats;
 
     public Enemy(EnemyStats enemyStats) {
@@ -27,11 +21,17 @@ public class Enemy {
     }
 
     public void hit(int damage) {
-        if (enemyStats.dead || flinching) return;
+        if (enemyStats.dead || enemyStats.flinching) {
+            return;
+        }
         enemyStats.health -= damage;
-        if (enemyStats.health < 0) enemyStats.health = 0;
-        if (enemyStats.health == 0) enemyStats.dead = true;
-        flinching = true;
-        flinchTimer = System.nanoTime();
+        if (enemyStats.health < 0) {
+            enemyStats.health = 0;
+        }
+        if (enemyStats.health == 0) {
+            enemyStats.dead = true;
+        }
+        enemyStats.flinching = true;
+        enemyStats.flinchTimer = System.nanoTime();
     }
 }

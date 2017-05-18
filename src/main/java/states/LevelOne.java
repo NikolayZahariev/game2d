@@ -1,6 +1,6 @@
 package states;
 
-import entities.enemies.TestEnemy;
+import entities.enemies.Slugger;
 import main.GamePanel;
 import main.State;
 import tilemaps.Background;
@@ -20,7 +20,7 @@ public class LevelOne implements State {
     private Berserker berserker;
     private Lich lich;
     private Player player;
-    private ArrayList<TestEnemy> enemies;
+    private ArrayList<Slugger> enemies;
 
     public LevelOne() {
         init();
@@ -43,17 +43,17 @@ public class LevelOne implements State {
             player = new Player(tileMap, lich.spriteSheet, lich.character, lich.movement);
             player.collision.characterMapPlacement.setPosition(100, 100);
         }
-        enemies = new ArrayList<TestEnemy>();
+        enemies = new ArrayList<>();
 
-        TestEnemy testEnemy;
+        Slugger slugger;
         Point[] enemySpawnPoint = new Point[]{
                 new Point(150, 100),
                 new Point(200, 120)
         };
         for (Point spawnPoint : enemySpawnPoint) {
-            testEnemy = new TestEnemy(tileMap);
-            testEnemy.collision.characterMapPlacement.setPosition(spawnPoint.x, spawnPoint.y);
-            enemies.add(testEnemy);
+            slugger = new Slugger(tileMap);
+            slugger.collision.characterMapPlacement.setPosition(spawnPoint.x, spawnPoint.y);
+            enemies.add(slugger);
         }
     }
 
@@ -64,9 +64,9 @@ public class LevelOne implements State {
         player.meleeAttack(enemies);
         tileMap.setPosition(GamePanel.WIDTH / 2 - player.collision.characterMapPlacement.getx(), GamePanel.HEIGHT / 2 - player.collision.characterMapPlacement.gety());
         for (int i = 0; i < enemies.size(); i++) {
-            TestEnemy testEnemy = enemies.get(i);
-            testEnemy.update();
-            if (testEnemy.enemy.isDead()) {
+            Slugger slugger = enemies.get(i);
+            slugger.update();
+            if (slugger.enemy.isDead()) {
                 enemies.remove(i);
                 i--;
             }
@@ -78,39 +78,39 @@ public class LevelOne implements State {
         background.draw(g);
         tileMap.draw(g);
         player.draw(g);
-        for (int i = 0; i < enemies.size(); i++) {
-            enemies.get(i).draw(g);
+        for (Slugger enemy : enemies) {
+            enemy.draw(g);
         }
     }
 
     @Override
     public void keyPressed(int k) {
-        if (k == KeyEvent.VK_LEFT) {
+        if (k == KeyEvent.VK_A | k == KeyEvent.VK_LEFT) {
             player.moveSet.left = false;
         }
-        if (k == KeyEvent.VK_RIGHT) {
+        if (k == KeyEvent.VK_D | k == KeyEvent.VK_RIGHT) {
             player.moveSet.right = false;
         }
         if (k == KeyEvent.VK_W | k == KeyEvent.VK_UP) {
             player.moveSet.jumping = false;
         }
-        if (k == KeyEvent.VK_J) {
+        if (k == KeyEvent.VK_J | k == KeyEvent.VK_Z) {
             player.character.attacking = false;
         }
     }
 
     @Override
     public void keyReleased(int k) {
-        if (k == KeyEvent.VK_LEFT) {
+        if (k == KeyEvent.VK_A | k == KeyEvent.VK_LEFT) {
             player.moveSet.left = true;
         }
-        if (k == KeyEvent.VK_RIGHT) {
+        if (k == KeyEvent.VK_D | k == KeyEvent.VK_RIGHT) {
             player.moveSet.right = true;
         }
         if (k == KeyEvent.VK_W | k == KeyEvent.VK_UP) {
             player.moveSet.jumping = true;
         }
-        if (k == KeyEvent.VK_J) {
+        if (k == KeyEvent.VK_J | k == KeyEvent.VK_Z) {
             player.character.attacking = true;
         }
     }

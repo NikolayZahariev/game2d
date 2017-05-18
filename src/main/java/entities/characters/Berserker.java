@@ -10,6 +10,9 @@ import tilemaps.TileMap;
 
 import java.util.ArrayList;
 
+/**
+ * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
+ */
 public class Berserker {
     public CollisionDetection collision;
     public SpriteDimensions spriteDimensions;

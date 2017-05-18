@@ -6,10 +6,9 @@ import core.SpriteSheet;
 import core.Visualization;
 import entities.core.*;
 import entities.core.Character;
-import entities.enemies.Enemy;
-import tilemaps.TileMap;
+import entities.enemies.Slugger;
 import main.GamePanel;
-import entities.enemies.TestEnemy;
+import tilemaps.TileMap;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -45,34 +44,22 @@ public class Player {
         visualization.setDelay(400);
     }
 
-    public void checkDamageTaken(ArrayList<TestEnemy> enemies) {
+    public void checkDamageTaken(ArrayList<Slugger> enemies) {
         for (int i = 0; i < enemies.size(); i++) {
-            TestEnemy testEnemy = enemies.get(i);
-            if (collision.hitboxIntersection(testEnemy)) {
-                hit(testEnemy.enemy.getDamage());
+            Slugger slugger = enemies.get(i);
+            if (collision.hitboxIntersection(slugger)) {
+                hit(slugger.enemy.getDamage());
             }
         }
     }
 
-    public void meleeAttack(ArrayList<TestEnemy> enemies) {
-        for (int i = 0; i < enemies.size(); i++) {
-            TestEnemy enemy = enemies.get(i);
+    public void meleeAttack(ArrayList<Slugger> enemies) {
+        for (Slugger enemy : enemies) {
             if (character.attacking) {
                 if (facingRight) {
-                    if ( enemy.collision.characterMapPlacement.getx() > collision.characterMapPlacement.x
-                            && enemy.collision.characterMapPlacement.getx() < collision.characterMapPlacement.x + character.attackRange
-                            && enemy.collision.characterMapPlacement.gety() > collision.characterMapPlacement.y - spriteDimensions.height / 2
-                            && enemy.collision.characterMapPlacement.gety() < collision.characterMapPlacement.y +  spriteDimensions.height / 2) {
-                        enemy.enemy.hit(character.attackDamage);
-                    }
-                } else {
-                    if ( enemy.collision.characterMapPlacement.getx() < collision.characterMapPlacement.x
-                            && enemy.collision.characterMapPlacement.getx() > collision.characterMapPlacement.x - character.attackRange
-                            && enemy.collision.characterMapPlacement.gety() > collision.characterMapPlacement.y - spriteDimensions.height / 2
-                            && enemy.collision.characterMapPlacement.gety() < collision.characterMapPlacement.y +  spriteDimensions.height / 2) {
-                        enemy.enemy.hit(character.attackDamage);
-                    }
+                    attackRightEnemy(enemy);
                 }
+                attackLeftEnemy(enemy);
             }
         }
     }
@@ -207,6 +194,24 @@ public class Player {
             if (collision.dy > movement.maxFallSpeed) {
                 collision.dy = movement.maxFallSpeed;
             }
+        }
+    }
+
+    private void attackRightEnemy(Slugger enemy) {
+        if (enemy.collision.characterMapPlacement.getx() > collision.characterMapPlacement.x
+                && enemy.collision.characterMapPlacement.getx() < collision.characterMapPlacement.x + character.attackRange
+                && enemy.collision.characterMapPlacement.gety() > collision.characterMapPlacement.y - spriteDimensions.height / 2
+                && enemy.collision.characterMapPlacement.gety() < collision.characterMapPlacement.y + spriteDimensions.height / 2) {
+            enemy.enemy.hit(character.attackDamage);
+        }
+    }
+
+    private void attackLeftEnemy(Slugger enemy) {
+        if (enemy.collision.characterMapPlacement.getx() < collision.characterMapPlacement.x
+                && enemy.collision.characterMapPlacement.getx() > collision.characterMapPlacement.x - character.attackRange
+                && enemy.collision.characterMapPlacement.gety() > collision.characterMapPlacement.y - spriteDimensions.height / 2
+                && enemy.collision.characterMapPlacement.gety() < collision.characterMapPlacement.y + spriteDimensions.height / 2) {
+            enemy.enemy.hit(character.attackDamage);
         }
     }
 }
