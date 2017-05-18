@@ -19,7 +19,7 @@ public class TestEnemy {
     public EnemyStats enemyStats = new EnemyStats(2, 2, false, false, 0, false, 1, new ArrayList<>(), new int[]{1});
     public Enemy enemy = new Enemy(enemyStats);
     private SpriteSheet spriteSheet = new SpriteSheet("/sprites/enemies/slugger.gif", 1);
-    private SpriteDimensions spriteDimensions;
+    public SpriteDimensions spriteDimensions;
     private Actions action = new ActionsBuilder().buildAnimations();
     private Movement movement;
     private Visualization visualization;

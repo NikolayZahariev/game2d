@@ -6,6 +6,7 @@ import core.SpriteSheet;
 import core.Visualization;
 import entities.core.*;
 import entities.core.Character;
+import entities.enemies.Enemy;
 import tilemaps.TileMap;
 import main.GamePanel;
 import entities.enemies.TestEnemy;
@@ -26,7 +27,7 @@ public class Player {
     private int currentAction;
     private Actions action = new ActionsBuilder().buildAnimations();
     private SpriteSheet spriteSheet;
-    private Character character;
+    public Character character;
 
     public Player(TileMap tileMap, SpriteSheet spriteSheet, Character character, Movement movement) {
         this.spriteSheet = spriteSheet;
@@ -49,6 +50,29 @@ public class Player {
             TestEnemy testEnemy = enemies.get(i);
             if (collision.hitboxIntersection(testEnemy)) {
                 hit(testEnemy.enemy.getDamage());
+            }
+        }
+    }
+
+    public void meleeAttack(ArrayList<TestEnemy> enemies) {
+        for (int i = 0; i < enemies.size(); i++) {
+            TestEnemy enemy = enemies.get(i);
+            if (character.attacking) {
+                if (facingRight) {
+                    if ( enemy.collision.characterMapPlacement.getx() > collision.characterMapPlacement.x
+                            && enemy.collision.characterMapPlacement.getx() < collision.characterMapPlacement.x + character.attackRange
+                            && enemy.collision.characterMapPlacement.gety() > collision.characterMapPlacement.y - spriteDimensions.height / 2
+                            && enemy.collision.characterMapPlacement.gety() < collision.characterMapPlacement.y +  spriteDimensions.height / 2) {
+                        enemy.enemy.hit(character.attackDamage);
+                    }
+                } else {
+                    if ( enemy.collision.characterMapPlacement.getx() < collision.characterMapPlacement.x
+                            && enemy.collision.characterMapPlacement.getx() > collision.characterMapPlacement.x - character.attackRange
+                            && enemy.collision.characterMapPlacement.gety() > collision.characterMapPlacement.y - spriteDimensions.height / 2
+                            && enemy.collision.characterMapPlacement.gety() < collision.characterMapPlacement.y +  spriteDimensions.height / 2) {
+                        enemy.enemy.hit(character.attackDamage);
+                    }
+                }
             }
         }
     }
