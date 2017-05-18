@@ -61,6 +61,7 @@ public class LevelOne implements State {
     public void update() {
         player.update();
         player.checkDamageTaken(enemies);
+        player.meleeAttack(enemies);
         tileMap.setPosition(GamePanel.WIDTH / 2 - player.collision.characterMapPlacement.getx(), GamePanel.HEIGHT / 2 - player.collision.characterMapPlacement.gety());
         for (int i = 0; i < enemies.size(); i++) {
             TestEnemy testEnemy = enemies.get(i);
@@ -93,6 +94,9 @@ public class LevelOne implements State {
         if (k == KeyEvent.VK_W | k == KeyEvent.VK_UP) {
             player.moveSet.jumping = false;
         }
+        if (k == KeyEvent.VK_J) {
+            player.character.attacking = false;
+        }
     }
 
     @Override
@@ -105,6 +109,9 @@ public class LevelOne implements State {
         }
         if (k == KeyEvent.VK_W | k == KeyEvent.VK_UP) {
             player.moveSet.jumping = true;
+        }
+        if (k == KeyEvent.VK_J) {
+            player.character.attacking = true;
         }
     }
 }

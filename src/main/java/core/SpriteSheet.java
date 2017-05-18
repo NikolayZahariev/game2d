@@ -27,7 +27,12 @@ public class SpriteSheet {
             for (int i = 0; i < frameHeight; i++) {
                 BufferedImage[] bi = new BufferedImage[character.numFrames[i]];
                 for (int j = 0; j < character.numFrames[i]; j++) {
-                    bi[j] = spriteSheet.getSubimage(j * spriteDimensions.width, i * spriteDimensions.height, spriteDimensions.width, spriteDimensions.height);
+                    if (i != 6) {
+                        bi[j] = spriteSheet.getSubimage(j * spriteDimensions.width, i * spriteDimensions.height, spriteDimensions.width, spriteDimensions.height);
+                    }
+                    else {
+                        bi[j] = spriteSheet.getSubimage(j * spriteDimensions.width*2, i * spriteDimensions.height, spriteDimensions.width*2, spriteDimensions.height);
+                    }
                 }
                 character.sprites.add(bi);
             }

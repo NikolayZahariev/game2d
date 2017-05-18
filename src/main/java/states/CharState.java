@@ -79,6 +79,7 @@ public class CharState implements State {
             case 0:
                 character = "berserker";
                 GamePanel.stateManager.setState(4);
+                break;
             case 1:
                 character = "lich";
                 GamePanel.stateManager.setState(4);
