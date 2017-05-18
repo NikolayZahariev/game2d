@@ -7,8 +7,11 @@ import core.Visualization;
 import entities.core.*;
 import entities.core.Character;
 import tilemaps.TileMap;
+import main.GamePanel;
+import entities.enemies.TestEnemy;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * @author Denis Dimitrov <denis.k.dimitrov@gmail.com>.
@@ -39,6 +42,15 @@ public class Player {
         currentAction = action.idle;
         visualization.setFrames(character.sprites.get(action.idle));
         visualization.setDelay(400);
+    }
+
+    public void checkDamageTaken(ArrayList<TestEnemy> enemies) {
+        for (int i = 0; i < enemies.size(); i++) {
+            TestEnemy testEnemy = enemies.get(i);
+            if (collision.hitboxIntersection(testEnemy)) {
+                hit(testEnemy.enemy.getDamage());
+            }
+        }
     }
 
     public void update() {
@@ -90,6 +102,12 @@ public class Player {
                 facingRight = false;
             }
         }
+        if (character.flinching) {
+            long elapsed = (System.nanoTime() - character.flinchTimer) / 1000000;
+            if (elapsed > 1000) {
+                character.flinching = false;
+            }
+        }
     }
 
     public void draw(Graphics g) {
@@ -105,6 +123,22 @@ public class Player {
         } else {
             g.drawImage(visualization.getImage(), (int) (collision.characterMapPlacement.x + collision.characterMapPlacement.xmap - spriteDimensions.width / 2 + spriteDimensions.width), (int) (collision.characterMapPlacement.y + collision.characterMapPlacement.ymap - spriteDimensions.height / 2), -spriteDimensions.width, spriteDimensions.height, null);
         }
+    }
+
+    private void hit(int damageTaken) {
+        if (character.flinching) {
+            return;
+        }
+        character.health -= damageTaken;
+        if (character.health < 0) {
+            character.health = 0;
+        }
+        if (character.health == 0) {
+            character.dead = true;
+            GamePanel.stateManager.setState(0);
+        }
+        character.flinching = true;
+        character.flinchTimer = System.nanoTime();
     }
 
     private void getNextPosition() {

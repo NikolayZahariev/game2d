@@ -1,32 +1,36 @@
 package entities.enemies;
 
 import tilemaps.TileMap;
+import entities.core.EnemyStats;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
  */
 public class Enemy {
-    protected int health;
-    protected int maxHealth;
-    protected boolean dead;
-    protected int damage;
-
     public boolean flinching;
     public long flinchTimer;
+    public EnemyStats enemyStats;
 
-    public Enemy() {}
+    public Enemy(EnemyStats enemyStats) {
+        this.enemyStats = enemyStats;
+    }
 
-    public boolean isDead() { return dead; }
+    public boolean isDead() {
+        return enemyStats.dead;
+    }
 
-    public int getDamage() { return damage; }
+    public int getDamage() {
+        return enemyStats.attackDamage;
+    }
 
     public void hit(int damage) {
-        if(dead || flinching) return;
-        health -= damage;
-        if(health < 0) health = 0;
-        if(health == 0) dead = true;
+        if (enemyStats.dead || flinching) return;
+        enemyStats.health -= damage;
+        if (enemyStats.health < 0) enemyStats.health = 0;
+        if (enemyStats.health == 0) enemyStats.dead = true;
         flinching = true;
         flinchTimer = System.nanoTime();
     }

@@ -3,6 +3,9 @@ package core;
 import entities.core.MapPlacement;
 import tilemaps.Tile;
 import tilemaps.TileMap;
+import entities.enemies.TestEnemy;
+
+import java.awt.*;
 
 /**
  * @author Nikolay Zahariev <nikolay.g.zahariev@gmail.com>.
@@ -31,6 +34,21 @@ public class CollisionDetection {
         this.tileMap = tileMap;
         tileSize = tileMap.getTileSize();
         characterMapPlacement = new MapPlacement(this.tileMap);
+    }
+
+    public boolean hitboxIntersection(TestEnemy enemy) {
+        Rectangle playerHitbox = getEntityHitbox();
+        Rectangle enemyHitbox = enemy.collision.getEntityHitbox();
+        return playerHitbox.intersects(enemyHitbox);
+    }
+
+    public Rectangle getEntityHitbox() {
+        return new Rectangle(
+                (int)characterMapPlacement.x - cwidth,
+                (int)characterMapPlacement.y - cheight,
+                cwidth,
+                cheight
+        );
     }
 
     public void checkTileMapCollision() {

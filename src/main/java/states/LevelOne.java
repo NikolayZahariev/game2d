@@ -44,9 +44,9 @@ public class LevelOne implements State {
                 new Point(150, 100),
                 new Point(200, 120)
         };
-        for (Point point : enemySpawnPoint) {
+        for (Point spawnPoint : enemySpawnPoint) {
             testEnemy = new TestEnemy(tileMap);
-            testEnemy.collision.characterMapPlacement.setPosition(point.x, point.y);
+            testEnemy.collision.characterMapPlacement.setPosition(spawnPoint.x, spawnPoint.y);
             enemies.add(testEnemy);
         }
     }
@@ -54,6 +54,7 @@ public class LevelOne implements State {
     @Override
     public void update() {
         player.update();
+        player.checkDamageTaken(enemies);
         tileMap.setPosition(GamePanel.WIDTH / 2 - player.collision.characterMapPlacement.getx(), GamePanel.HEIGHT / 2 - player.collision.characterMapPlacement.gety());
         for (int i = 0; i < enemies.size(); i++) {
             TestEnemy testEnemy = enemies.get(i);
