@@ -18,6 +18,7 @@ public class LevelOne implements State {
     private TileMap tileMap;
     private Background background = new Background(0.1);
     private Berserker berserker;
+    private Lich lich;
     private Player player;
     private ArrayList<TestEnemy> enemies;
 
@@ -33,8 +34,13 @@ public class LevelOne implements State {
         tileMap.setPosition(0, 0);
         background.getResource("/backgrounds/levelone.gif");
         berserker = new Berserker(tileMap);
+        lich = new Lich(tileMap);
         if (CharState.character == "berserker") {
             player = new Player(tileMap, berserker.spriteSheet, berserker.character, berserker.movement);
+            player.collision.characterMapPlacement.setPosition(100, 100);
+        }
+        if (CharState.character == "lich") {
+            player = new Player(tileMap, lich.spriteSheet, lich.character, lich.movement);
             player.collision.characterMapPlacement.setPosition(100, 100);
         }
         enemies = new ArrayList<TestEnemy>();
