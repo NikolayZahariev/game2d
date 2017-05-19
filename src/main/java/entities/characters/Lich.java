@@ -19,7 +19,7 @@ public class Lich {
     public CollisionDetection collision;
     public SpriteDimensions spriteDimensions;
     public SpriteSheet spriteSheet;
-    public Character character = new Character(10, 10, false, false, 0, false, 100, 5, new ArrayList<>(), new int[]{2, 8, 1, 2, 4, 2, 5});
+    public Character character = new Character(10, 10, false, false, 0, false, 3, 31, new ArrayList<>(), new int[]{2, 8, 1, 2, 4, 2, 5});
     public Actions action = new ActionsBuilder().buildAnimations();
     public Movement movement;
     public Visualization visualization;

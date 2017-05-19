@@ -27,7 +27,7 @@ public class Slugger {
 
     public Slugger(TileMap tileMap) {
         collision = new CollisionDetection(tileMap);
-        movement = new Movement(0.3, 1.6, 0.4, 0.15, 4.0, -4.8, 0.3);
+        movement = new Movement(0.1, 0.9, 0.4, 0.15, 4.0, -4.8, 0.3);
         spriteDimensions = new SpriteDimensions(30, 30);
         collision.cwidth = 20;
         collision.cheight = 20;
@@ -49,6 +49,11 @@ public class Slugger {
             if (collision.dx > movement.maxSpeed) {
                 collision.dx = movement.maxSpeed;
             }
+        }
+
+        if (moveSet.jumping && !collision.falling) {
+            collision.dy = movement.jumpStart;
+            collision.falling = true;
         }
 
         if (collision.falling) {

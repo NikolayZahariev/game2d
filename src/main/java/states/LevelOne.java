@@ -1,5 +1,6 @@
 package states;
 
+import entities.enemies.EnemyMovement;
 import entities.enemies.Slugger;
 import main.GamePanel;
 import main.State;
@@ -21,6 +22,7 @@ public class LevelOne implements State {
     private Lich lich;
     private Player player;
     private ArrayList<Slugger> enemies;
+    private EnemyMovement enemyMovement;
 
     public LevelOne() {
         init();
@@ -65,6 +67,8 @@ public class LevelOne implements State {
         tileMap.setPosition(GamePanel.WIDTH / 2 - player.collision.characterMapPlacement.getx(), GamePanel.HEIGHT / 2 - player.collision.characterMapPlacement.gety());
         for (int i = 0; i < enemies.size(); i++) {
             Slugger slugger = enemies.get(i);
+            enemyMovement = new EnemyMovement(player, slugger);
+            enemyMovement.movement();
             slugger.update();
             if (slugger.enemy.isDead()) {
                 enemies.remove(i);
