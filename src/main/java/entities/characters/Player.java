@@ -6,6 +6,7 @@ import core.SpriteSheet;
 import core.Visualization;
 import entities.core.*;
 import entities.core.Character;
+import entities.enemies.Enemy;
 import entities.enemies.Slugger;
 import main.GamePanel;
 import tilemaps.TileMap;
@@ -44,17 +45,17 @@ public class Player {
         visualization.setDelay(400);
     }
 
-    public void checkDamageTaken(ArrayList<Slugger> enemies) {
+    public void checkDamageTaken(ArrayList<Enemy> enemies) {
         for (int i = 0; i < enemies.size(); i++) {
-            Slugger slugger = enemies.get(i);
+            Enemy slugger = enemies.get(i);
             if (collision.hitboxIntersection(slugger)) {
-                hit(slugger.enemy.getDamage());
+                hit(slugger.getDamage());
             }
         }
     }
 
-    public void meleeAttack(ArrayList<Slugger> enemies) {
-        for (Slugger enemy : enemies) {
+    public void meleeAttack(ArrayList<Enemy> enemies) {
+        for (Enemy enemy : enemies) {
             if (character.attacking) {
                 if (facingRight) {
                     attackRightEnemy(enemy);
@@ -197,21 +198,21 @@ public class Player {
         }
     }
 
-    private void attackRightEnemy(Slugger enemy) {
+    private void attackRightEnemy(Enemy enemy) {
         if (enemy.collision.characterMapPlacement.getx() > collision.characterMapPlacement.x
                 && enemy.collision.characterMapPlacement.getx() < collision.characterMapPlacement.x + character.attackRange
                 && enemy.collision.characterMapPlacement.gety() > collision.characterMapPlacement.y - spriteDimensions.height / 2
                 && enemy.collision.characterMapPlacement.gety() < collision.characterMapPlacement.y + spriteDimensions.height / 2) {
-            enemy.enemy.hit(character.attackDamage);
+            enemy.hit(character.attackDamage);
         }
     }
 
-    private void attackLeftEnemy(Slugger enemy) {
+    private void attackLeftEnemy(Enemy enemy) {
         if (enemy.collision.characterMapPlacement.getx() < collision.characterMapPlacement.x
                 && enemy.collision.characterMapPlacement.getx() > collision.characterMapPlacement.x - character.attackRange
                 && enemy.collision.characterMapPlacement.gety() > collision.characterMapPlacement.y - spriteDimensions.height / 2
                 && enemy.collision.characterMapPlacement.gety() < collision.characterMapPlacement.y + spriteDimensions.height / 2) {
-            enemy.enemy.hit(character.attackDamage);
+            enemy.hit(character.attackDamage);
         }
     }
 }

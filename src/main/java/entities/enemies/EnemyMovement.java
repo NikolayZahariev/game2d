@@ -9,9 +9,9 @@ import java.util.ArrayList;
  */
 public class EnemyMovement {
     public Player player;
-    public Slugger enemy;
+    public Enemy enemy;
 
-    public EnemyMovement(Player player, Slugger enemy) {
+    public EnemyMovement(Player player, Enemy enemy) {
         this.player = player;
         this.enemy = enemy;
     }
@@ -32,14 +32,14 @@ public class EnemyMovement {
         }
     }
 
-    private boolean moveLeft(Slugger enemy) {
+    private boolean moveLeft(Enemy enemy) {
         if (enemy.collision.characterMapPlacement.getx() > player.collision.characterMapPlacement.x) {
             return true;
         }
         return false;
     }
 
-    private boolean jump(Slugger enemy) {
+    private boolean jump(Enemy enemy) {
         if (enemy.collision.characterMapPlacement.gety() > player.collision.characterMapPlacement.y) {
             return true;
         }
