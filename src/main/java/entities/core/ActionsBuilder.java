@@ -42,6 +42,7 @@ public class ActionsBuilder {
         this.fireball = fireball;
         return this;
     }
+
     public ActionsBuilder scratching(int scratching) {
         this.scratching = scratching;
         return this;

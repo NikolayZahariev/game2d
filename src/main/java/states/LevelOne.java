@@ -70,11 +70,11 @@ public class LevelOne implements State {
         player.meleeAttack(enemies);
         tileMap.setPosition(GamePanel.WIDTH / 2 - player.collision.characterMapPlacement.getx(), GamePanel.HEIGHT / 2 - player.collision.characterMapPlacement.gety());
         for (int i = 0; i < enemies.size(); i++) {
-            Enemy slugger = enemies.get(i);
-            enemyMovement = new EnemyMovement(player, slugger);
+            Enemy enemy = enemies.get(i);
+            enemyMovement = new EnemyMovement(player, enemy);
             enemyMovement.movement();
-            slugger.update();
-            if (slugger.isDead()) {
+            enemy.update();
+            if (enemy.isDead()) {
                 enemies.remove(i);
                 i--;
             }

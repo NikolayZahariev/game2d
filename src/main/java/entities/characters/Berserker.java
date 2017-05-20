@@ -4,8 +4,10 @@ import core.CollisionDetection;
 import core.SpriteDimensions;
 import core.SpriteSheet;
 import core.Visualization;
-import entities.core.*;
+import entities.core.Actions;
+import entities.core.ActionsBuilder;
 import entities.core.Character;
+import entities.core.Movement;
 import tilemaps.TileMap;
 
 import java.util.ArrayList;

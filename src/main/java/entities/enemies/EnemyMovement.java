@@ -25,24 +25,14 @@ public class EnemyMovement {
             enemy.moveSet.right = true;
         }
 
-        if (jump(enemy)) {
-            enemy.moveSet.jumping = true;
-        } else {
-            enemy.moveSet.jumping = false;
-        }
+        enemy.moveSet.jumping = jump(enemy);
     }
 
     private boolean moveLeft(Enemy enemy) {
-        if (enemy.collision.characterMapPlacement.getx() > player.collision.characterMapPlacement.x) {
-            return true;
-        }
-        return false;
+        return enemy.collision.characterMapPlacement.getx() > player.collision.characterMapPlacement.x;
     }
 
     private boolean jump(Enemy enemy) {
-        if (enemy.collision.characterMapPlacement.gety() > player.collision.characterMapPlacement.y) {
-            return true;
-        }
-        return false;
+        return enemy.collision.characterMapPlacement.gety() > player.collision.characterMapPlacement.y;
     }
 }

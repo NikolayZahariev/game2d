@@ -13,9 +13,9 @@ import java.awt.image.BufferedImage;
  */
 public class GamePanel extends JPanel implements Runnable, KeyListener {
     public static StateManager stateManager = new StateManager();
-    public static final int WIDTH = 320;
-    public static final int HEIGHT = 240;
-    public static final int SCALE = 2;
+    public static int WIDTH = 320;
+    public static int HEIGHT = 240;
+    public static int SCALE = 2;
     private Thread thread;
     private boolean running;
     private int FPS = 60;

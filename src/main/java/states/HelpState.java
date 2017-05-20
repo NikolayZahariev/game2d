@@ -45,7 +45,7 @@ public class HelpState implements State {
             } else {
                 graphics.setColor(Color.WHITE);
             }
-            graphics.drawString(options[i], 31, 140 + i * 15);
+            graphics.drawString(options[i], 30, 140 + i * 15);
         }
     }
 

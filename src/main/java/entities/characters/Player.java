@@ -7,7 +7,6 @@ import core.Visualization;
 import entities.core.*;
 import entities.core.Character;
 import entities.enemies.Enemy;
-import entities.enemies.Slugger;
 import main.GamePanel;
 import tilemaps.TileMap;
 
@@ -47,9 +46,9 @@ public class Player {
 
     public void checkDamageTaken(ArrayList<Enemy> enemies) {
         for (int i = 0; i < enemies.size(); i++) {
-            Enemy slugger = enemies.get(i);
-            if (collision.hitboxIntersection(slugger)) {
-                hit(slugger.getDamage());
+            Enemy enemy = enemies.get(i);
+            if (collision.hitboxIntersection(enemy)) {
+                hit(enemy.getDamage());
             }
         }
     }
