@@ -7,12 +7,12 @@ import java.awt.*;
 public class TileMap {
     public TileLoader tileLoading;
     public MapLoader mapLoading;
+    public int numRowsToDraw;
+    public int numColsToDraw;
     private double tween;
     private int tileSize;
     private int rowOffset;
     private int colOffset;
-    private int numRowsToDraw;
-    private int numColsToDraw;
 
     public TileMap(int tileSize) {
         this.tileSize = tileSize;

@@ -48,7 +48,7 @@ public class Player {
         for (int i = 0; i < enemies.size(); i++) {
             Enemy enemy = enemies.get(i);
             if (collision.hitboxIntersection(enemy)) {
-                hit(enemy.getDamage());
+                onDamageTaken(enemy.getDamage());
             }
         }
     }
@@ -136,7 +136,7 @@ public class Player {
         }
     }
 
-    private void hit(int damageTaken) {
+    private void onDamageTaken(int damageTaken) {
         if (character.flinching) {
             return;
         }
@@ -202,7 +202,7 @@ public class Player {
                 && enemy.collision.characterMapPlacement.getx() < collision.characterMapPlacement.x + character.attackRange
                 && enemy.collision.characterMapPlacement.gety() > collision.characterMapPlacement.y - spriteDimensions.height / 2
                 && enemy.collision.characterMapPlacement.gety() < collision.characterMapPlacement.y + spriteDimensions.height / 2) {
-            enemy.hit(character.attackDamage);
+            enemy.onDamageTaken(character.attackDamage);
         }
     }
 
@@ -211,7 +211,7 @@ public class Player {
                 && enemy.collision.characterMapPlacement.getx() > collision.characterMapPlacement.x - character.attackRange
                 && enemy.collision.characterMapPlacement.gety() > collision.characterMapPlacement.y - spriteDimensions.height / 2
                 && enemy.collision.characterMapPlacement.gety() < collision.characterMapPlacement.y + spriteDimensions.height / 2) {
-            enemy.hit(character.attackDamage);
+            enemy.onDamageTaken(character.attackDamage);
         }
     }
 }

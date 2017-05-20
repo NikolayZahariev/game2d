@@ -24,9 +24,8 @@ public class LevelOne implements State {
     private Berserker berserker;
     private Lich lich;
     private Player player;
-    private ArrayList<Enemy> enemies = new ArrayList<>();
+    private ArrayList<Enemy> enemies;
     private EnemyMovement enemyMovement;
-    private Enemy enemy;
     private Slugger slugger;
 
     public LevelOne() {
@@ -51,10 +50,13 @@ public class LevelOne implements State {
             player = new Player(tileMap, lich.spriteSheet, lich.character, lich.movement);
             player.collision.characterMapPlacement.setPosition(100, 100);
         }
+        enemies = new ArrayList<>();
 
+        Enemy enemy;
         Point[] enemySpawnPoint = new Point[]{
                 new Point(150, 100),
-                new Point(200, 120)
+                new Point(200, 120),
+                new Point(300, 150),
         };
         for (Point spawnPoint : enemySpawnPoint) {
             enemy = new Enemy(tileMap, slugger.spriteSheet, slugger.enemyStats, slugger.movement);
@@ -76,7 +78,7 @@ public class LevelOne implements State {
             enemy.update();
             if (enemy.isDead()) {
                 enemies.remove(i);
-                i--;
+                enemy.enemyStats.dead = false;
             }
         }
     }

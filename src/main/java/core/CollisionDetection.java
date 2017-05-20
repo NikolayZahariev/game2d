@@ -2,9 +2,9 @@ package core;
 
 import entities.core.MapPlacement;
 import entities.enemies.Enemy;
+import main.GamePanel;
 import tilemaps.Tile;
 import tilemaps.TileMap;
-import entities.enemies.Slugger;
 
 import java.awt.*;
 
@@ -45,8 +45,8 @@ public class CollisionDetection {
 
     public Rectangle getEntityHitbox() {
         return new Rectangle(
-                (int)characterMapPlacement.x - cwidth,
-                (int)characterMapPlacement.y - cheight,
+                (int) characterMapPlacement.x - cwidth,
+                (int) characterMapPlacement.y - cheight,
                 cwidth,
                 cheight
         );
@@ -115,12 +115,16 @@ public class CollisionDetection {
         int rightTile = (int) (x + cwidth / 2 - 1) / tileSize;
         int topTile = (int) (y - cheight / 2) / tileSize;
         int bottomTile = (int) (y + cheight / 2 - 1) / tileSize;
-
+        if (topTile < 0 || bottomTile >= tileMap.mapLoading.numRows ||
+                leftTile < 0 || rightTile >= tileMap.mapLoading.numCols) {
+            topLeft = topRight = bottomLeft = bottomRight = false;
+            GamePanel.stateManager.setState(0);
+            return;
+        }
         int tl = tileMap.getType(topTile, leftTile);
         int tr = tileMap.getType(topTile, rightTile);
         int bl = tileMap.getType(bottomTile, leftTile);
         int br = tileMap.getType(bottomTile, rightTile);
-
         topLeft = tl == Tile.BLOCKED;
         topRight = tr == Tile.BLOCKED;
         bottomLeft = bl == Tile.BLOCKED;

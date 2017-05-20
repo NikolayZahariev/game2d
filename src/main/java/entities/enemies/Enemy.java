@@ -116,7 +116,7 @@ public class Enemy {
         return enemyStats.attackDamage;
     }
 
-    public void hit(int damage) {
+    public void onDamageTaken(int damage) {
         if (enemyStats.dead || enemyStats.flinching) {
             return;
         }
